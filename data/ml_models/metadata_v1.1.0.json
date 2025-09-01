@@ -1,0 +1,19 @@
+{
+  "model_version": "1.1.0",
+  "training_samples": 12,
+  "last_training": "2025-09-01T14:06:51.008693",
+  "performance": {
+    "random_forest": {
+      "error": "n_splits=5 cannot be greater than the number of members in each class."
+    },
+    "gradient_boosting": {
+      "error": "n_splits=5 cannot be greater than the number of members in each class."
+    },
+    "svm": {
+      "error": "n_splits=5 cannot be greater than the number of members in each class."
+    },
+    "neural_network": {
+      "error": "n_splits=5 cannot be greater than the number of members in each class."
+    }
+  }
+}

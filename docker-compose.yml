@@ -1,0 +1,102 @@
+services:
+  cai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cai-framework:0.5.3-ml
+    container_name: cai-ml-system
+    hostname: cai-framework
+    restart: unless-stopped
+    
+    # Environment variables
+    environment:
+      - CAI_MODEL=gemini/gemini-2.5-flash
+      - CAI_LOG_LEVEL=INFO
+      - CAI_ENV=production
+    
+    # Persistent volumes
+    volumes:
+      # ML models and learning data
+      - cai_ml_models:/opt/cai/data/ml_models
+      - cai_knowledge_base:/opt/cai/data/knowledge_base
+      - cai_logs:/opt/cai/logs
+      # Configuration
+      - ./config:/opt/cai/config:ro
+    
+    # Network configuration
+    networks:
+      - cai_network
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    
+    # Security (removed no-new-privileges for compatibility)
+    # security_opt:
+    #   - no-new-privileges:true
+    
+    # Interactive mode
+    stdin_open: true
+    tty: true
+    
+    # Custom command for production
+    # command: ["python", "-m", "cai.cli"]
+
+  # Optional: Web interface (future)
+  cai-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cai-framework:0.5.3-ml
+    container_name: cai-web-interface
+    depends_on:
+      - cai
+    ports:
+      - "8080:8080"
+    environment:
+      - CAI_MODE=web
+    volumes:
+      - cai_ml_models:/opt/cai/data/ml_models:ro
+      - cai_logs:/opt/cai/logs
+    networks:
+      - cai_network
+    # Disabled by default
+    profiles:
+      - web
+
+# Persistent volumes
+volumes:
+  cai_ml_models:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/ml_models
+      o: bind
+  
+  cai_knowledge_base:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/knowledge_base
+      o: bind
+  
+  cai_logs:
+    driver: local
+    driver_opts:
+      type: none  
+      device: ${PWD}/logs
+      o: bind
+
+# Networks
+networks:
+  cai_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

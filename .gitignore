@@ -165,3 +165,50 @@ pentestperf
 venv*
 
 .claude
+
+# CAI ML and Production Files
+# ML Models (use Git LFS for large models if needed)
+*.pkl
+*.joblib
+*.model
+data/ml_models/*.pkl
+data/ml_models/*.joblib
+
+# Production environment files
+.env.production.local
+
+# Reconnaissance and pentest outputs  
+*_nmap.*
+*_amass.*
+*_subfinder.*
+*_httpx.*
+gospider_*/
+*.gnmap
+*.xml
+active_*.txt
+live_*.txt
+*_subdomains.txt
+*_crawl.txt
+*_output/
+*_results.txt
+*_probe.txt
+reports/
+pentest/
+
+# Temporary CAI files
+napoleon
+yes
+get-pip.py
+*.py.py
+exploit.py
+*_payloads.txt
+*_params.txt
+fixed_payload.json
+test_payload*.json
+
+# Third-party integrations
+.kilocode/
+
+# Docker and monitoring
+health_report.json
+monitor_config.json

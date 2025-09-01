@@ -1,0 +1,216 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cai-framework
+  namespace: security
+  labels:
+    app: cai-framework
+    version: "0.5.3-ml"
+    tier: security
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: cai-framework
+  template:
+    metadata:
+      labels:
+        app: cai-framework
+        version: "0.5.3-ml"
+        tier: security
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: cai
+        image: cai-framework:0.5.3-ml
+        imagePullPolicy: IfNotPresent
+        
+        # Environment
+        env:
+        - name: CAI_ENV
+          value: "production"
+        - name: CAI_LOG_LEVEL
+          value: "INFO"
+        - name: CAI_MODEL
+          value: "gemini/gemini-2.5-flash"
+        - name: CAI_ML_ENGINE_ENABLED
+          value: "true"
+        
+        # Resources
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        
+        # Storage
+        volumeMounts:
+        - name: cai-ml-models
+          mountPath: /opt/cai/data/ml_models
+        - name: cai-knowledge-base
+          mountPath: /opt/cai/data/knowledge_base
+        - name: cai-logs
+          mountPath: /opt/cai/logs
+        - name: cai-config
+          mountPath: /opt/cai/config
+          readOnly: true
+        
+        # Health checks
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import cai; print('CAI alive')"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import cai.ml_engine; print('CAI ready')"
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        # Security
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+            - ALL
+      
+      # Volumes
+      volumes:
+      - name: cai-ml-models
+        persistentVolumeClaim:
+          claimName: cai-ml-models-pvc
+      - name: cai-knowledge-base
+        persistentVolumeClaim:
+          claimName: cai-knowledge-base-pvc
+      - name: cai-logs
+        emptyDir:
+          sizeLimit: 1Gi
+      - name: cai-config
+        configMap:
+          name: cai-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cai-framework-service
+  namespace: security
+  labels:
+    app: cai-framework
+spec:
+  selector:
+    app: cai-framework
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cai-ml-models-pvc
+  namespace: security
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: ssd
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cai-knowledge-base-pvc
+  namespace: security
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ssd
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cai-config
+  namespace: security
+data:
+  production.yaml: |
+    # CAI Framework Production Configuration
+    version: "0.5.3-ml"
+    
+    # Application settings
+    app:
+      name: "CAI Framework"
+      environment: "production"
+      log_level: "INFO"
+    
+    # Model configuration
+    model:
+      name: "gemini/gemini-2.5-flash"
+      temperature: 0.7
+      max_tokens: 8192
+    
+    # ML Engine settings
+    ml_engine:
+      enabled: true
+      model_dir: "/opt/cai/data/ml_models"
+      training_interval: 3600
+      min_samples_per_class: 5
+      confidence_threshold: 0.8
+      algorithms:
+        - "random_forest"
+        - "gradient_boosting"
+        - "svm"
+        - "neural_network"
+    
+    # Security settings
+    security:
+      mode: "strict"
+      enable_dangerous_tools: false
+      max_concurrent_agents: 5
+    
+    # Features
+    features:
+      continuous_learning: true
+      advanced_reasoning: true
+      parallel_execution: true
+      session_management: true
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: security
+  labels:
+    name: security
+    purpose: cybersecurity-tools
