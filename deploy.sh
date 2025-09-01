@@ -166,11 +166,13 @@ build_image() {
 deploy() {
     log "Deploying CAI with Docker Compose..."
     
-    # Stop existing containers if running
-    if docker-compose ps | grep -q "${CONTAINER_NAME}"; then
-        warning "Stopping existing CAI container..."
-        docker-compose down
-    fi
+    # Clean up existing deployment
+    log "Cleaning up existing deployment..."
+    docker-compose down --remove-orphans 2>/dev/null || true
+    
+    # Remove conflicting networks if they exist
+    docker network rm cyber_napoleon_cai_network 2>/dev/null || true
+    docker network prune -f 2>/dev/null || true
     
     # Start new deployment
     if docker-compose up -d; then
