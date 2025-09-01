@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="napoleon_logo.png" alt="Napoleon Cybersecurity AI" width="400">
+</div>
+
 # 🔱 CYBER NAPOLEON - Advanced Cybersecurity AI Framework
 
 **Cyber Napoleon** is a production-ready, enterprise-grade fork of the [CAI (Cyber AI) Framework](https://github.com/aliasrobotics/cai), enhanced with real machine learning capabilities, automated deployment infrastructure, and comprehensive monitoring systems.
