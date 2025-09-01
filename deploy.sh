@@ -70,11 +70,45 @@ check_config_files() {
     
     # Check .env
     if [[ ! -f ".env" ]]; then
-        missing_files+=(" .env")
         if [[ -f ".env.example" ]]; then
-            warning ".env missing, but .env.example found. Please review and copy:"
-            echo "  cp .env.example .env"
-            echo "  # Edit .env with your API keys and configuration"
+            warning ".env missing, creating from .env.example template..."
+            cp .env.example .env
+            success "Created .env from template. You may need to add your API keys later."
+        else
+            warning ".env and .env.example not found. Creating minimal .env..."
+            cat > .env << 'EOF'
+# CAI Framework - Basic Configuration
+# Generated automatically by deploy.sh
+
+# Basic settings
+OPENAI_API_KEY=""
+ANTHROPIC_API_KEY=""
+OLLAMA=""
+PROMPT_TOOLKIT_NO_CPR=1
+CAI_STREAM=false
+
+# Production settings
+CAI_ENV=production
+CAI_VERSION=0.5.3-ml
+CAI_LOG_LEVEL=INFO
+CAI_ML_ENGINE_ENABLED=true
+CAI_SECURITY_MODE=strict
+CAI_ENABLE_DANGEROUS_TOOLS=false
+CAI_MAX_CONCURRENT_AGENTS=5
+CAI_DATA_DIR=/opt/cai/data
+CAI_LOG_DIR=/opt/cai/logs
+CAI_BIND_ADDRESS=0.0.0.0
+CAI_PORT=8080
+CAI_TIMEOUT=300
+CAI_HEALTH_CHECK_ENABLED=true
+CAI_METRICS_ENABLED=true
+CAI_PERFORMANCE_MONITORING=true
+CAI_CONTINUOUS_LEARNING=true
+CAI_ADVANCED_REASONING=true
+CAI_PARALLEL_EXECUTION=true
+CAI_SESSION_MANAGEMENT=true
+EOF
+            success "Created minimal .env file. Add your API keys if needed."
         fi
     fi
     

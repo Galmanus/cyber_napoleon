@@ -65,8 +65,7 @@ RUN python -m pip install --user --upgrade pip \
 # Copy ML models if they exist
 COPY --chown=cai:cai data/ml_models/ ./data/ml_models/
 
-# Copy configuration files
-COPY --chown=cai:cai .env ./
+# Note: .env file is created by deploy.sh before build if needed
 
 # Set Python path
 ENV PYTHONPATH="/opt/cai/src"
