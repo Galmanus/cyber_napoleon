@@ -61,7 +61,7 @@ class UIManager:
             str: The user input
         """
         kb = create_key_bindings(current_text)
-        toolbar = get_toolbar_with_refresh(current_text)
+        toolbar = get_toolbar_with_refresh()
 
         user_input = await get_user_input(
             command_completer, kb, history_file, toolbar, current_text

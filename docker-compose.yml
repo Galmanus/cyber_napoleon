@@ -88,10 +88,6 @@ volumes:
   
   cai_logs:
     driver: local
-    driver_opts:
-      type: none  
-      device: ${PWD}/logs
-      o: bind
 
 # Networks
 networks:

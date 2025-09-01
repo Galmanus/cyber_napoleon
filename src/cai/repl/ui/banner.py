@@ -153,28 +153,18 @@ def display_banner(console: Console):
     """
     version = get_version()
 
-    # Original banner with Alias Robotics colors (blue and white)
-    # Use noqa to ignore line length for the ASCII art
+    # Epic Cyber Napoleon banner with French Imperial colors (gold and blue)
+    # Perfectly centered and elegant ASCII art
     banner = f"""
-[bold blue]                CCCCCCCCCCCCC      ++++++++   ++++++++      IIIIIIIIII
-[bold blue]             CCC::::::::::::C  ++++++++++       ++++++++++  I::::::::I
-[bold blue]           CC:::::::::::::::C ++++++++++         ++++++++++ I::::::::I
-[bold blue]          C:::::CCCCCCCC::::C +++++++++    ++     +++++++++ II::::::II
-[bold blue]         C:::::C       CCCCCC +++++++     +++++     +++++++   I::::I
-[bold blue]        C:::::C                +++++     +++++++     +++++    I::::I
-[bold blue]        C:::::C                ++++                   ++++    I::::I
-[bold blue]        C:::::C                 ++                     ++     I::::I
-[bold blue]        C:::::C                  +   +++++++++++++++   +      I::::I
-[bold blue]        C:::::C                    +++++++++++++++++++        I::::I
-[bold blue]        C:::::C                     +++++++++++++++++         I::::I
-[bold blue]         C:::::C       CCCCCC        +++++++++++++++          I::::I
-[bold blue]          C:::::CCCCCCCC::::C         +++++++++++++         II::::::II
-[bold blue]           CC:::::::::::::::C           +++++++++           I::::::::I
-[bold blue]             CCC::::::::::::C             +++++             I::::::::I
-[bold blue]                CCCCCCCCCCCCC               ++              IIIIIIIIII
+[bold gold]                 ____      _                 _   _                   _                   
+[bold gold]                / ___|   _| |__   ___ _ __  | \ | | __ _ _ __   ___ | | ___  ___  _ __   
+[bold gold]               | |  | | | | '_ \ / _ \ '__| |  \| |/ _` | '_ \ / _ \| |/ _ \/ _ \| '_ \  
+[bold gold]               | |__| |_| | |_) |  __/ |    | |\  | (_| | |_) | (_) | |  __/ (_) | | | | 
+[bold gold]                \____\__, |_.__/ \___|_|    |_| \_|\__,_| .__/ \___/|_|\___|\___/|_| |_| 
+[bold gold]                     |___/                              |_|                             
 
-[bold blue]                              Cybersecurity AI (CAI), v{version}[/bold blue]
-[white]                                  Bug bounty-ready AI[/white]
+[bold blue]                           ⚔️  CYBER NAPOLEON v{version} ⚔️
+[bold white]                      🏴‍☠️ Conquer the digital battlefield 🏴‍☠️
     """
 
     console.print(banner, end="")
@@ -315,35 +305,35 @@ def display_quick_guide(console: Console):
     from rich.console import Group  # <-- Fix: import Group
 
     help_text = Text.assemble(
-        ("CAI Command Reference", "bold cyan underline"), "\n\n",
+        ("⚔️ CYBER NAPOLEON COMMAND ARSENAL ⚔️", "bold gold underline"), "\n\n",
         ("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim"), "\n",
-        ("AGENT MANAGEMENT", "bold yellow"), " (/a)\n",
-        ("  CAI>/agent list", "green"), " - List all available agents\n",
-        ("  CAI>/agent select [NAME]", "green"), " - Switch to specific agent\n",
-        ("  CAI>/agent info [NAME]", "green"), " - Show agent details\n",
-        ("  CAI>/parallel add [NAME]", "green"), " - Configure parallel agents\n\n",
+        ("🏛️ IMPERIAL AGENT COMMAND", "bold yellow"), " (/a)\n",
+        ("  Napoleon>/agent list", "green"), " - Muster all available generals\n",
+        ("  Napoleon>/agent select [NAME]", "green"), " - Appoint field commander\n",
+        ("  Napoleon>/agent info [NAME]", "green"), " - Review general's dossier\n",
+        ("  Napoleon>/parallel add [NAME]", "green"), " - Deploy multiple corps\n\n",
         
-        ("MEMORY & HISTORY", "bold yellow"), "\n",
-        ("  CAI>/memory list", "green"), " - List saved memories\n",
-        ("  CAI>/history", "green"), " - View conversation history\n",
-        ("  CAI>/compact", "green"), " - AI-powered conversation summary\n",
-        ("  CAI>/flush", "green"), " - Clear conversation history\n\n",
+        ("📜 CAMPAIGN ARCHIVES", "bold yellow"), "\n",
+        ("  Napoleon>/memory list", "green"), " - Review battle chronicles\n",
+        ("  Napoleon>/history", "green"), " - Study campaign records\n",
+        ("  Napoleon>/compact", "green"), " - Imperial intelligence summary\n",
+        ("  Napoleon>/flush", "green"), " - Clear the war room\n\n",
         
-        ("ENVIRONMENT", "bold yellow"), "\n",
-        ("  CAI>/workspace set [NAME]", "green"), " - Set workspace directory\n",
-        ("  CAI>/config", "green"), " - Manage environment variables\n",
-        ("  CAI>/virt run [IMAGE]", "green"), " - Run Docker containers\n\n",
+        ("🏴‍☠️ BATTLEFIELD CONTROL", "bold yellow"), "\n",
+        ("  Napoleon>/workspace set [NAME]", "green"), " - Establish command post\n",
+        ("  Napoleon>/config", "green"), " - Adjust battle parameters\n",
+        ("  Napoleon>/virt run [IMAGE]", "green"), " - Deploy siege engines\n\n",
         
-        ("TOOLS & INTEGRATION", "bold yellow"), "\n",
-        ("  CAI>/mcp load [TYPE] [CONFIG]", "green"), " - Load MCP servers\n",
-        ("  CAI>/shell [COMMAND]", "green"), " or $ - Execute shell commands\n",
-        ("  CAI>/model [NAME]", "green"), " - Change AI model\n\n",
+        ("⚡ ARTILLERY & RECONNAISSANCE", "bold yellow"), "\n",
+        ("  Napoleon>/mcp load [TYPE] [CONFIG]", "green"), " - Load siege weapons\n",
+        ("  Napoleon>/shell [COMMAND]", "green"), " or $ - Execute field orders\n",
+        ("  Napoleon>/model [NAME]", "green"), " - Choose war strategy\n\n",
         
-        ("QUICK SHORTCUTS", "bold yellow"), "\n",
-        ("  ESC + ENTER", "green"), " - Multi-line input\n",
-        ("  TAB", "green"), " - Command completion\n",
-        ("  ↑/↓", "green"), " - Command history\n",
-        ("  Ctrl+C", "green"), " - Interrupt/Exit\n",
+        ("🗡️ TACTICAL MANEUVERS", "bold yellow"), "\n",
+        ("  ESC + ENTER", "green"), " - Multi-line battle plans\n",
+        ("  TAB", "green"), " - Command suggestions\n",
+        ("  ↑/↓", "green"), " - Previous orders\n",
+        ("  Ctrl+C", "green"), " - Strategic retreat\n",
         ("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim"), "\n",
     )
     
@@ -352,30 +342,30 @@ def display_quick_guide(console: Console):
     current_agent_type = os.getenv('CAI_AGENT_TYPE', "one_tool_agent")
     
     config_text = Text.assemble(
-        ("Quick Start Workflows", "bold cyan underline"), "\n\n",
-        ("🎯 CTF Challenge", "bold yellow"), "\n",
-        ("  1. CAI> /agent select redteam_agent", "green"), "\n",
-        ("  2. CAI> /workspace set ctf_name", "green"), "\n",
-        ("  3. CAI> Describe the challenge...", "green"), "\n\n",
+        ("⚔️ IMPERIAL BATTLE STRATEGIES ⚔️", "bold gold underline"), "\n\n",
+        ("🎯 Conquest Campaign", "bold yellow"), "\n",
+        ("  1. Napoleon> /agent select redteam_agent", "green"), "\n",
+        ("  2. Napoleon> /workspace set enemy_fortress", "green"), "\n",
+        ("  3. Napoleon> Begin the digital siege...", "green"), "\n\n",
         
-        ("🐛 Bug Bounty", "bold yellow"), "\n",
-        ("  1. CAI> /agent select bug_bounter_agent", "green"), "\n",
-        ("  2. CAI> /model claude-3-7-sonnet", "green"), "\n",
-        ("  3. CAI> Test https://example.com", "green"), "\n\n",
+        ("🛡️ Bounty Warfare", "bold yellow"), "\n",
+        ("  1. Napoleon> /agent select bug_bounter_agent", "green"), "\n",
+        ("  2. Napoleon> /model claude-3-7-sonnet", "green"), "\n",
+        ("  3. Napoleon> Attack https://enemy.com", "green"), "\n\n",
         
-        ("CAI collects pseudonymized data to improve our research.\n"
-         "Your privacy is protected in compliance with GDPR.\n"
-         "Continue to start, or press Ctrl-C to exit.", "yellow"), "\n\n",
+        ("The Emperor protects your data through imperial decree.\n"
+         "Privacy secured by the Code Napoléon of cybersecurity.\n"
+         "Advance to victory, or retreat with Ctrl-C.", "yellow"), "\n\n",
         
-        ("🔍 Parallel Recon", "bold yellow"), "\n",
-        ("  1. CAI> /parallel add red_teamer", "green"), "\n",
-        ("  2. CAI> /parallel add network_traffic_analyzer", "green"), "\n",
-        ("  3. CAI> Scan 192.168.1.0/24", "green"), "\n\n",
+        ("🔍 Multi-Corps Reconnaissance", "bold yellow"), "\n",
+        ("  1. Napoleon> /parallel add red_teamer", "green"), "\n",
+        ("  2. Napoleon> /parallel add network_traffic_analyzer", "green"), "\n",
+        ("  3. Napoleon> Scout enemy network 192.168.1.0/24", "green"), "\n\n",
         
-        ("🛠️ MCP Tools Integration", "bold yellow"), "\n",
-        ("  1. CAI> /mcp load sse http://localhost:3000", "green"), "\n",
-        ("  2. CAI> /mcp add server_name agent_name", "green"), "\n",
-        ("  3. CAI> Use the new tools...", "green"), "\n\n",
+        ("🏹 Artillery Integration", "bold yellow"), "\n",
+        ("  1. Napoleon> /mcp load cannon http://localhost:3000", "green"), "\n",
+        ("  2. Napoleon> /mcp add artillery_unit field_marshal", "green"), "\n",
+        ("  3. Napoleon> Deploy the war machines...", "green"), "\n\n",
         
         ("Environment Variables:", "bold yellow"), "\n",
         ("  CAI_MODEL", "green"), f" = {current_model}\n",
@@ -444,7 +434,7 @@ def display_quick_guide(console: Console):
             expand=True,
             align="center"
         ),
-        title="[bold]🚀 CAI defacto scaffolding for cybersecurity agents - Type /help for detailed documentation[/bold]",
+        title="[bold]⚔️ CYBER NAPOLEON - AI-Powered Digital Warfare Framework - Type /help for battle commands ⚔️[/bold]",
         border_style="blue",
         padding=(1, 2),
         title_align="center"

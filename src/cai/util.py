@@ -4732,3 +4732,34 @@ def start_claude_thinking_if_applicable(model_name, agent_name, counter):
     if streaming_enabled and detect_claude_thinking_in_stream(model_name):
         return create_claude_thinking_context(agent_name, counter, model_name)
     return None
+
+
+def validate_and_warn():
+    """
+    Validate CAI configuration and warn about any issues.
+    
+    Returns:
+        tuple: (config_valid, validated_config) where config_valid is a boolean
+               indicating if the configuration is valid, and validated_config is a
+               dictionary of validated configuration values.
+    """
+    config = {}
+    config_valid = True
+    
+    # Check for required environment variables
+    required_vars = {
+        'CAI_MODEL': 'gemini/gemini-2.5-flash',  # Default model
+        'CAI_LOG_LEVEL': 'INFO',
+        'CAI_ENV': 'production'
+    }
+    
+    for var_name, default_value in required_vars.items():
+        value = os.getenv(var_name, default_value)
+        config[var_name.lower().replace('cai_', '')] = value
+        if var_name == 'CAI_MODEL' and not value:
+            print(f"Warning: {var_name} not set, using default: {default_value}")
+    
+    # Set agent type based on configuration or use default
+    config['agent_type'] = 'one_tool_agent'
+    
+    return config_valid, config

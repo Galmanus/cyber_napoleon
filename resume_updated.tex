@@ -1,0 +1,202 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome}
+\usepackage{xcolor}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Manuel Guilherme da Silva Almeida} \\ \vspace{1pt}
+    \textbf{\large Cybersecurity AI Engineer \& Web3 Developer} \\ \vspace{5pt}
+    \small Blumenau, SC, Brazil $|$ \href{mailto:m.galmanus@gmail.com}{m.galmanus@gmail.com} $|$ +55 (47) 99745-5602 \\
+    \href{https://linkedin.com/in/galmanus}{\underline{linkedin.com/in/galmanus}} $|$
+    \href{https://github.com/Galmanus}{\underline{github.com/Galmanus}} \\
+    \vspace{3pt}
+    \textit{Seeking remote opportunities in Web3, DeFi, and Cybersecurity. Fluent in English.}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Senior Security Engineer with 6+ years architecting enterprise-grade cybersecurity AI platforms and Web3 solutions. \textbf{Creator of Cyber Napoleon}, a production-ready AI framework with 180,000+ lines of advanced cybersecurity code, real machine learning capabilities, and enterprise infrastructure. Proven expertise in AI-driven security automation, advanced evasion techniques, and full-stack DApp development. As the founder of Galmanus Real State, engineered innovative Web3 platforms for asset tokenization. Passionate about revolutionizing cybersecurity through AI and solving complex challenges in decentralized systems.}
+
+%-----------PROJECTS-----------
+\section{Major Project Highlights}
+  \resumeSubHeadingListStart
+    \resumeProjectHeading
+          {\textbf{Cyber Napoleon - Enterprise Cybersecurity AI Platform} $|$ \emph{FLAGSHIP PROJECT}}{2024--2025}
+          \resumeItemListStart
+            \resumeItem{\textbf{180,000+ lines of advanced cybersecurity code} - Built from scratch}
+            \resumeItem{\textbf{Real Machine Learning Engine}: 4-algorithm ensemble (Random Forest, Gradient Boosting, SVM, Neural Networks) with 43-feature extraction}
+            \resumeItem{\textbf{Advanced Evasion System}: 8 specialized tools (127,512+ lines) including WAF Bypasser, JavaScript Payload Generator, Stealth DNS Exfiltration}
+            \resumeItem{\textbf{Production Infrastructure}: Complete Docker containerization, Kubernetes orchestration, enterprise monitoring}
+            \resumeItem{\textbf{Performance Results}: 85-95\% evasion success rate, 90\% faster deployment, 99.9\% uptime}
+            \resumeItem{\textbf{Integration Scale}: 60+ cybersecurity tools (nmap, amass, subfinder, gospider, nuclei, etc.)}
+          \resumeItemListEnd
+          
+    \resumeProjectHeading
+          {\textbf{AI-Powered Cybersecurity Platform (CAI Enhancement)}}{2024--2025}
+          \resumeItemListStart
+            \resumeItem{Enhanced original CAI framework from basic ~5,000 lines to enterprise-grade 180,000+ lines platform}
+            \resumeItem{Developed custom AI agents: Firewall Evasion Expert, Adaptive Learning Agent, XSS Expert, Parallel Orchestrator}
+            \resumeItem{Improved agent success rate from 75\% to 99.5\% through advanced debugging and infrastructure optimization}
+          \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{AI \& Machine Learning (Advanced)}{: Real ML Implementation (Scikit-learn, Random Forest, Gradient Boosting, SVM, Neural Networks), AI Agent Development, LLM Integration (Google Gemini API, OpenAI, Anthropic), ML Operations} \\
+     \textbf{Advanced Cybersecurity (Expert)}{: Advanced Evasion Techniques (WAF bypassing, JavaScript payload generation, traffic obfuscation, DNS exfiltration), Penetration Testing, Red Teaming, Custom Security Tools (8 proprietary tools), DFIR, Cryptography} \\
+     \textbf{Enterprise Infrastructure (Advanced)}{: Production DevOps (Docker, Kubernetes), Cloud Security (AWS, GCP), Automation (CI/CD), Monitoring \& Observability (Health checks, metrics, SIEM integration)} \\
+     \textbf{Blockchain \& Web3 (Advanced)}{: Smart Contract Development/Auditing (Solidity 0.8.x, ERC20, ERC721), DApp Development (React, Next.js 14, Hardhat, Ethers.js), Security Focus} \\
+     \textbf{Programming \& Development (Expert)}{: Python (Advanced - 180,000+ lines), TypeScript, JavaScript, Solidity, Go, Bash/Shell, React, Next.js 14, Node.js, FastAPI}
+    }}
+ \end{itemize}
+
+%-----------ADDITIONAL PROJECTS-----------
+\section{Additional Key Projects}
+  \resumeSubHeadingListStart
+    \resumeProjectHeading
+          {\textbf{Galmanus Real State – DApp for Real Estate Tokenization}}{2023--2024}
+          \resumeItemListStart
+            \resumeItem{Led full-stack Web3 platform development for real estate asset tokenization (NFTs + fractional shares)}
+            \resumeItem{Architected complete solution: DAO governance smart contracts, responsive Next.js 14 frontend}
+            \resumeItem{Deployed on Sepolia testnet with advanced security features and user experience optimization}
+          \resumeItemListEnd
+          
+    \resumeProjectHeading
+          {\textbf{Napoleon XSS Scanner – Advanced Security Tool}}{2022--2023}
+          \resumeItemListStart
+            \resumeItem{Engineered Python XSS scanner with advanced WAF/CSP bypass capabilities}
+            \resumeItem{Achieved higher detection rates than standard tools through innovative crawling techniques}
+            \resumeItem{Integrated with Burp Suite: Reduced manual analysis time by 70\% in bug bounty programs}
+          \resumeItemListEnd
+          
+    \resumeProjectHeading
+          {\textbf{Bug Bounty \& Ethical Hacking Success}}{2020--2021}
+          \resumeItemListStart
+            \resumeItem{Identified 15+ critical vulnerabilities across major platforms (NBA.com, Cube Exchange)}
+            \resumeItem{Specialized in XSS, SQL Injection, S3 misconfigurations with responsible disclosure}
+            \resumeItem{Built reputation in cybersecurity community through consistent high-quality findings}
+          \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {IFBA, Instituto Federal da Bahia}{Salvador, BA, Brazil}
+      {Bachelor's Degree in Software Engineering}{2011 -- 2015}
+    \resumeSubheading
+      {Entra 21}{Blumenau, SC, Brazil}
+      {IT Technician}{2023 -- 2027}
+  \resumeSubHeadingListEnd
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications \& Recognition}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Ethereum Developer Bootcamp}, Alchemy (2024) \\
+     \textbf{Cybersecurity Fundamentals}, Linux Foundation (2023) \\
+     \textbf{Front-End Developer}, Meta (2021) \\
+     \textbf{Oracle ONE Programming} (2020)
+    }}
+ \end{itemize}
+
+%-----------ACHIEVEMENTS-----------
+\section{Key Achievements \& Metrics}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Technical Leadership}: Created enterprise-grade AI platform from scratch (180,000+ lines), Integrated 60+ cybersecurity tools, Achieved 99.9\% system uptime \\
+     \textbf{Innovation \& Impact}: First AI framework combining real ML with advanced evasion techniques, 85-95\% evasion success rate, 90\% deployment time reduction \\
+     \textbf{Open Source}: Cyber Napoleon public repository, Community impact through advanced cybersecurity capabilities, Comprehensive technical documentation
+    }}
+ \end{itemize}
+
+\vfill
+\center{\small \textit{Available for immediate start on challenging projects in Cybersecurity AI, Web3 Security, or Advanced Threat Detection.}}
+
+\end{document}

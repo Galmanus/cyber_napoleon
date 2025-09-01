@@ -4,7 +4,7 @@ FROM python:3.12-slim
 # Set metadata
 LABEL maintainer="CAI Framework Team"
 LABEL version="0.5.3-ml"
-LABEL description="Cybersecurity AI Framework with Real Machine Learning"
+LABEL description="CYBER NAPOLEON - Cybersecurity AI Framework with Real Machine Learning"
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
@@ -37,9 +37,10 @@ RUN apt-get update && apt-get install -y \
 # Create CAI user for security (non-root)
 RUN groupadd -r cai && useradd -r -g cai -d $CAI_HOME -s /bin/bash cai
 
-# Create directories
-RUN mkdir -p $CAI_HOME $CAI_DATA $CAI_MODELS \
-    && chown -R cai:cai $CAI_HOME
+# Create directories with proper permissions
+RUN mkdir -p $CAI_HOME $CAI_DATA $CAI_MODELS $CAI_HOME/logs \
+    && chown -R cai:cai $CAI_HOME \
+    && chmod -R 755 $CAI_HOME
 
 # Switch to CAI user
 USER cai
@@ -55,7 +56,7 @@ COPY --chown=cai:cai pyproject.toml ./
 # Install Python dependencies from pyproject.toml
 RUN python -m pip install --user --upgrade pip
 
-# Install core CAI dependencies (matching pyproject.toml)
+# Install core CAI dependencies with ML support (matching pyproject.toml)
 RUN python -m pip install --user \
     folium \
     matplotlib \
@@ -70,7 +71,7 @@ RUN python -m pip install --user \
     openinference-instrumentation-openai \
     wasabi \
     rich \
-    prompt_toolkit \
+    prompt-toolkit \
     python-dotenv \
     litellm \
     mako \
@@ -81,11 +82,10 @@ RUN python -m pip install --user \
     dnspython \
     flask \
     networkx \
-    PyPDF2
-
-# Install additional cybersecurity and ML packages
-RUN python -m pip install --user \
+    PyPDF2 \
     scikit-learn \
+    joblib \
+    pytz \
     seaborn \
     httpx \
     click \
@@ -114,5 +114,5 @@ EXPOSE 8080
 # Set volumes for persistent data
 VOLUME ["/opt/cai/data", "/opt/cai/logs"]
 
-# Default command - Interactive CAI
-CMD ["bash", "-c", "echo '🤖 CAI Framework v0.5.3-ml Ready!' && python -c 'import sys; print(f\"Python: {sys.version}\"); print(f\"Working Dir: /opt/cai\")' && exec bash"]
+# Default command - CYBER NAPOLEON Interactive CAI with ML
+CMD ["bash", "-c", "echo '⚔️ CYBER NAPOLEON v0.5.3-ml Ready! 🤖' && echo '🧠 Real Machine Learning System Active!' && python -c 'import sys; print(f\"Python: {sys.version}\"); print(f\"Working Dir: /opt/cai\"); print(\"🎯 Banner: CYBER NAPOLEON theme activated\"); print(\"🤖 ML Engine: 4 algorithms ready (RF, GB, SVM, NN)\")' && exec bash"]

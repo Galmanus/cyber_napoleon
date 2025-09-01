@@ -66,7 +66,7 @@ def create_prompt_style():
     })
 
 
-def get_user_input(
+async def get_user_input(
     command_completer,
     key_bindings,
     history_file,
@@ -86,6 +86,8 @@ def get_user_input(
     Returns:
         User input string
     """
+    from prompt_toolkit import PromptSession
+    
     # Function to update current text and get command shadow
     def get_rprompt():
         """Get the right prompt with command shadow."""
@@ -94,9 +96,9 @@ def get_user_input(
             return None
         return HTML(f'<ansigray>{shadow}</ansigray>')
 
-    # Get user input with all features
-    return prompt(
-        [('class:prompt', 'CAI> ')],
+    # Create a prompt session
+    session = PromptSession(
+        [('class:prompt', 'Napoleon> ')],
         completer=command_completer,
         style=create_prompt_style(),
         history=FileHistory(str(history_file)),
@@ -113,3 +115,6 @@ def get_user_input(
         rprompt=get_rprompt,
         color_depth=None,  # Auto-detect color support
     )
+
+    # Get user input with all features
+    return await session.prompt_async()
