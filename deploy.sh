@@ -204,6 +204,10 @@ deploy() {
     log "Cleaning up existing deployment..."
     docker-compose down --remove-orphans 2>/dev/null || true
     
+    # Remove any existing containers with the same name
+    docker rm -f cai-ml-system 2>/dev/null || true
+    docker rm -f cai-web-interface 2>/dev/null || true
+    
     # Remove conflicting networks if they exist
     docker network rm cyber_napoleon_cai_network 2>/dev/null || true
     docker network prune -f 2>/dev/null || true
