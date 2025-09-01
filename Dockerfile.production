@@ -1,0 +1,116 @@
+# Napoleon Cybersecurity AI - Production Docker Image
+# Multi-stage build for optimal size and security
+FROM python:3.12-slim as base
+
+# Build stage - Install everything needed
+FROM base as builder
+
+# Set build arguments
+ARG CAI_VERSION=0.5.3-ml
+ARG BUILD_DATE
+ARG VCS_REF
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc \
+    g++ \
+    git \
+    curl \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create wheel directory
+RUN mkdir /wheels
+
+# Install Python dependencies and create wheels
+COPY requirements.txt /tmp/
+RUN pip install --upgrade pip && \
+    pip wheel --no-cache-dir --wheel-dir /wheels -r /tmp/requirements.txt
+
+# Production stage - Minimal runtime
+FROM base as production
+
+# Set metadata
+LABEL org.opencontainers.image.title="Napoleon Cybersecurity AI"
+LABEL org.opencontainers.image.description="Enterprise-grade cybersecurity AI framework with real ML"
+LABEL org.opencontainers.image.version="${CAI_VERSION}"
+LABEL org.opencontainers.image.created="${BUILD_DATE}"
+LABEL org.opencontainers.image.revision="${VCS_REF}"
+LABEL org.opencontainers.image.vendor="Napoleon Project"
+LABEL org.opencontainers.image.licenses="MIT"
+
+# Install runtime dependencies ONLY
+RUN apt-get update && apt-get install -y \
+    # Core system tools
+    curl \
+    wget \
+    nmap \
+    netcat-openbsd \
+    dnsutils \
+    ca-certificates \
+    # Python runtime deps
+    libpython3.12 \
+    # Cleanup
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Create non-root user
+RUN groupadd -r napoleon && \
+    useradd -r -g napoleon -d /app -s /bin/bash napoleon && \
+    mkdir -p /app /app/data /app/logs /app/config && \
+    chown -R napoleon:napoleon /app
+
+# Copy wheels from builder stage
+COPY --from=builder /wheels /wheels
+
+# Install Python packages from wheels (faster and more reliable)
+RUN pip install --no-cache-dir --no-index --find-links /wheels \
+    scikit-learn pandas numpy matplotlib seaborn \
+    litellm httpx asyncio \
+    rich click pyyaml requests beautifulsoup4 \
+    aiohttp fastapi uvicorn \
+    mcp lxml jinja2 python-dotenv \
+    anthropic openai python-multipart \
+    pydantic typing-extensions \
+    && rm -rf /wheels
+
+# Switch to non-root user
+USER napoleon
+WORKDIR /app
+
+# Copy application files with proper ownership
+COPY --chown=napoleon:napoleon src/ ./src/
+COPY --chown=napoleon:napoleon tools/ ./tools/
+COPY --chown=napoleon:napoleon agents.yml ./
+COPY --chown=napoleon:napoleon pyproject.toml ./
+
+# Copy configuration files
+COPY --chown=napoleon:napoleon .env.example .env
+COPY --chown=napoleon:napoleon entrypoint.sh ./
+
+# Set environment variables
+ENV PYTHONPATH="/app/src:${PYTHONPATH}"
+ENV PATH="/home/napoleon/.local/bin:${PATH}"
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV CAI_HOME=/app
+ENV CAI_DATA=/app/data
+ENV CAI_LOGS=/app/logs
+ENV CAI_CONFIG=/app/config
+
+# Create health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python -c "import sys; sys.path.append('/app/src'); import cai; print('OK')" || exit 1
+
+# Expose port
+EXPOSE 8080
+
+# Set up volumes
+VOLUME ["/app/data", "/app/logs"]
+
+# Use custom entrypoint for setup
+ENTRYPOINT ["./entrypoint.sh"]
+
+# Default command
+CMD ["python", "-c", "import sys; sys.path.append('/app/src'); print('🚀 Napoleon Cybersecurity AI Ready!'); import cai.cli; cai.cli.main()"]

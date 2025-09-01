@@ -1,0 +1,156 @@
+version: '3.8'
+
+# Napoleon Cybersecurity AI - Production Deployment
+# Guaranteed to work on any machine with Docker + Docker Compose
+
+services:
+  napoleon:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+      args:
+        BUILD_DATE: ${BUILD_DATE:-$(date -u +'%Y-%m-%dT%H:%M:%SZ')}
+        VCS_REF: ${VCS_REF:-$(git rev-parse --short HEAD)}
+    image: napoleon-cybersecurity:latest
+    container_name: napoleon-ai
+    hostname: napoleon
+    restart: unless-stopped
+    
+    # Environment variables with safe defaults
+    environment:
+      # Core settings
+      - CAI_ENV=production
+      - CAI_VERSION=0.5.3-ml
+      - CAI_LOG_LEVEL=${CAI_LOG_LEVEL:-INFO}
+      
+      # Model configuration (works without API keys)
+      - CAI_MODEL=${CAI_MODEL:-gemini/gemini-2.5-flash}
+      - CAI_MODEL_TEMPERATURE=${CAI_MODEL_TEMPERATURE:-0.7}
+      - CAI_MODEL_MAX_TOKENS=${CAI_MODEL_MAX_TOKENS:-8192}
+      
+      # Machine Learning
+      - CAI_ML_ENGINE_ENABLED=true
+      - CAI_ML_TRAINING_INTERVAL=3600
+      - CAI_ML_MIN_SAMPLES_PER_CLASS=5
+      - CAI_ML_CONFIDENCE_THRESHOLD=0.8
+      
+      # Security (safe defaults)
+      - CAI_SECURITY_MODE=strict
+      - CAI_ENABLE_DANGEROUS_TOOLS=false
+      - CAI_MAX_CONCURRENT_AGENTS=5
+      
+      # Network
+      - CAI_BIND_ADDRESS=0.0.0.0
+      - CAI_PORT=8080
+      - CAI_TIMEOUT=300
+      
+      # Features
+      - CAI_CONTINUOUS_LEARNING=true
+      - CAI_ADVANCED_REASONING=true
+      - CAI_PARALLEL_EXECUTION=true
+      - CAI_SESSION_MANAGEMENT=true
+      
+      # Optional API keys (override via .env file)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    
+    # Use NAMED VOLUMES (portable across any machine)
+    volumes:
+      - napoleon_data:/app/data
+      - napoleon_logs:/app/logs
+      - napoleon_config:/app/config
+    
+    # Port mapping
+    ports:
+      - "${NAPOLEON_PORT:-8080}:8080"
+    
+    # Network
+    networks:
+      - napoleon_network
+    
+    # Resource limits (prevent system overload)
+    deploy:
+      resources:
+        limits:
+          cpus: '${CPU_LIMIT:-2.0}'
+          memory: ${MEMORY_LIMIT:-4G}
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.path.append('/app/src'); import cai; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+    
+    # Security
+    security_opt:
+      - no-new-privileges:true
+    read_only: false  # Need write access for ML models
+    
+    # Interactive mode for development
+    stdin_open: true
+    tty: true
+
+  # Optional: Web interface
+  napoleon-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    image: napoleon-cybersecurity:latest
+    container_name: napoleon-web
+    depends_on:
+      napoleon:
+        condition: service_healthy
+    ports:
+      - "${NAPOLEON_WEB_PORT:-8081}:8080"
+    environment:
+      - CAI_MODE=web
+      - CAI_ENV=production
+    volumes:
+      - napoleon_data:/app/data:ro
+      - napoleon_logs:/app/logs
+    networks:
+      - napoleon_network
+    profiles:
+      - web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# NAMED VOLUMES - Work on any machine/OS
+volumes:
+  napoleon_data:
+    driver: local
+    labels:
+      - "napoleon.volume.type=data"
+      - "napoleon.volume.description=ML models and knowledge base"
+  
+  napoleon_logs:
+    driver: local
+    labels:
+      - "napoleon.volume.type=logs"
+      - "napoleon.volume.description=Application logs"
+  
+  napoleon_config:
+    driver: local
+    labels:
+      - "napoleon.volume.type=config"
+      - "napoleon.volume.description=Configuration files"
+
+# Isolated network
+networks:
+  napoleon_network:
+    driver: bridge
+    name: napoleon_net
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+    labels:
+      - "napoleon.network.description=Napoleon AI internal network"
