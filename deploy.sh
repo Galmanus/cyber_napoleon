@@ -154,11 +154,45 @@ create_directories() {
 build_image() {
     log "Building CAI Docker image..."
     
-    if docker build -t "${IMAGE_NAME}" .; then
-        success "Docker image built successfully."
-    else
-        error "Failed to build Docker image."
+    # Check for Docker 28.x build bug workaround
+    DOCKER_VERSION=$(docker version --format '{{.Client.Version}}' 2>/dev/null || echo "unknown")
+    
+    if [[ $DOCKER_VERSION =~ ^28\. ]]; then
+        warning "Docker 28.x detected - applying build workaround for known bug..."
+        
+        # Try alternative build methods
+        log "Attempting build with explicit context..."
+        if docker build --file ./Dockerfile --tag "${IMAGE_NAME}" .; then
+            success "Docker image built successfully with workaround."
+            return 0
+        fi
+        
+        log "Trying with absolute path..."
+        if docker build --file "$(pwd)/Dockerfile" --tag "${IMAGE_NAME}" "$(pwd)"; then
+            success "Docker image built successfully with absolute path."
+            return 0
+        fi
+        
+        log "Attempting with production Dockerfile..."
+        if [[ -f "Dockerfile.production" ]]; then
+            if docker build --file ./Dockerfile.production --tag "${IMAGE_NAME}" .; then
+                success "Docker image built successfully with production Dockerfile."
+                return 0
+            fi
+        fi
+        
+        error "Docker 28.x build bug detected. Unable to build image."
+        error "Please downgrade Docker to version 27.x or try manual build."
+        error "Manual build command: docker build -t ${IMAGE_NAME} ."
         exit 1
+    else
+        # Standard build for other Docker versions
+        if docker build -t "${IMAGE_NAME}" .; then
+            success "Docker image built successfully."
+        else
+            error "Failed to build Docker image."
+            exit 1
+        fi
     fi
 }
 
