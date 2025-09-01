@@ -72,7 +72,15 @@ Napoleon features an **enterprise-grade deployment system** that works on **ANY 
 # Clone and deploy Napoleon
 git clone https://github.com/Galmanus/cyber_napoleon.git
 cd cyber_napoleon
+
+# Option 1: Use Napoleon launcher script (Recommended)
+./napoleon.sh
+
+# Option 2: Use original deployment script
 ./deploy.sh
+
+# Option 3: Quick start and CLI access
+./start-napoleon.sh
 ```
 
 **That's it!** Napoleon automatically:
@@ -186,6 +194,28 @@ docker-compose ps
 ### 📚 **Detailed Setup Guide**
 
 For advanced configuration, troubleshooting, and customization options, see our comprehensive **[Production Deployment Guide](DEPLOY.md)**.
+
+### 🎆 **Napoleon Launcher Scripts**
+
+Napoleon includes convenient launcher scripts for easy operation:
+
+```bash
+# ⚔️ Main launcher script with all options
+./napoleon.sh [command]
+
+# Available commands:
+./napoleon.sh start      # Deploy and start Napoleon (default)
+./napoleon.sh cli        # Access Napoleon CLI directly 
+./napoleon.sh status     # Show container status and resources
+./napoleon.sh logs       # Show Napoleon system logs
+./napoleon.sh stop       # Stop Napoleon containers
+./napoleon.sh rebuild    # Force rebuild and restart
+./napoleon.sh clean      # Clean everything and rebuild from scratch
+./napoleon.sh help       # Show help and usage
+
+# 🚀 Quick start launcher (deploy + CLI access)
+./start-napoleon.sh      # Ultra-fast deployment and CLI access
+```
 
 ### 🔧 **Management Commands**
 
