@@ -52,15 +52,52 @@ COPY --chown=cai:cai agents.yml ./
 COPY --chown=cai:cai *.md ./
 COPY --chown=cai:cai pyproject.toml ./
 
-# Install Python dependencies
-RUN python -m pip install --user --upgrade pip \
-    && python -m pip install --user scikit-learn pandas numpy matplotlib seaborn \
-    && python -m pip install --user litellm httpx asyncio \
-    && python -m pip install --user rich click pyyaml requests beautifulsoup4 \
-    && python -m pip install --user aiohttp fastapi uvicorn \
-    && python -m pip install --user mcp lxml jinja2 python-dotenv \
-    && python -m pip install --user anthropic openai python-multipart \
-    && python -m pip install --user pydantic typing-extensions
+# Install Python dependencies from pyproject.toml
+RUN python -m pip install --user --upgrade pip
+
+# Install core CAI dependencies (matching pyproject.toml)
+RUN python -m pip install --user \
+    folium \
+    matplotlib \
+    numpy \
+    pandas \
+    openai==1.75.0 \
+    pydantic \
+    griffe \
+    typing-extensions \
+    requests \
+    types-requests \
+    openinference-instrumentation-openai \
+    wasabi \
+    rich \
+    prompt_toolkit \
+    python-dotenv \
+    litellm \
+    mako \
+    mcp \
+    mkdocs \
+    mkdocs-material \
+    paramiko \
+    dnspython \
+    flask \
+    networkx \
+    PyPDF2
+
+# Install additional cybersecurity and ML packages
+RUN python -m pip install --user \
+    scikit-learn \
+    seaborn \
+    httpx \
+    click \
+    pyyaml \
+    beautifulsoup4 \
+    aiohttp \
+    fastapi \
+    uvicorn \
+    lxml \
+    jinja2 \
+    anthropic \
+    python-multipart
 
 # Copy ML models if they exist
 COPY --chown=cai:cai data/ml_models/ ./data/ml_models/
