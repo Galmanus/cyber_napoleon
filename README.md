@@ -61,39 +61,82 @@ Napoleon **preserves 100%** of CAI's original cybersecurity capabilities while a
 
 Napoleon features an **enterprise-grade deployment system** that works on **ANY machine** with Docker:
 
-#### Prerequisites (Only 2 requirements!)
-- **Docker** 20.03+ → [Install Docker](https://docs.docker.com/get-docker/)
+#### Prerequisites
+- **Docker** 20.03+ → [Install Docker](https://docs.docker.com/get-docker/) 
 - **Docker Compose** 1.29+ → [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-#### One-Command Deploy (Works Everywhere!)
+> **⚠️ Docker 28.x Users**: If you have Docker 28.x, see the [Docker 28.x Workaround](#-docker-28x-workaround) section below for build issues.
+
+#### 🚀 **Standard Deployment (Recommended)**
 ```bash
-# Clone and deploy Napoleon (100% guaranteed to work)
+# Clone and deploy Napoleon
 git clone https://github.com/Galmanus/cyber_napoleon.git
 cd cyber_napoleon
-./deploy-production.sh
+./deploy.sh
 ```
 
 **That's it!** Napoleon automatically:
 - ✅ Validates your system and Docker installation
+- ✅ Creates required configuration files (`.env`, `agents.yml`)
 - ✅ Builds optimized containers with all dependencies
 - ✅ Configures everything with safe defaults
 - ✅ Starts services with health monitoring
 - ✅ Shows you exactly how to use it
+
+#### 🐛 **Docker 28.x Workaround**
+
+Docker 28.x has a known bug that prevents reading Dockerfiles correctly. If you encounter build errors, use these solutions:
+
+##### **Solution 1: Enhanced Deploy Script (Automatic)**
+Our deploy script automatically detects Docker 28.x and applies workarounds:
+```bash
+./deploy.sh  # Includes automatic Docker 28.x detection and fixes
+```
+
+##### **Solution 2: Manual Build Script**
+For difficult cases, use the dedicated workaround script:
+```bash
+./build-manual.sh  # Tries 4 different build methods
+```
+
+##### **Solution 3: Downgrade Docker (Recommended)**
+The most reliable solution is downgrading to Docker 27.x:
+```bash
+# Ubuntu/Debian
+sudo apt remove docker-ce docker-ce-cli containerd.io
+sudo apt update
+sudo apt install docker-ce=5:27.* docker-ce-cli=5:27.* containerd.io
+
+# CentOS/RHEL
+sudo yum remove docker-ce docker-ce-cli containerd.io
+sudo yum install docker-ce-27.* docker-ce-cli-27.* containerd.io
+
+# After downgrade, run normal deployment
+./deploy.sh
+```
+
+##### **Solution 4: Alternative Container Runtime**
+```bash
+# Use Podman instead of Docker
+sudo apt install podman
+alias docker=podman
+./deploy.sh
+```
 
 ### 🖥️ **Using Napoleon After Deployment**
 
 #### Start Interactive Session
 ```bash
 # Access Napoleon's full cybersecurity suite
-docker-compose -f docker-compose.production.yml exec napoleon bash
+docker-compose exec cai bash
 ```
 
 #### Train ML Models
 ```bash
 # Train Napoleon's ML engine on cybersecurity data
-docker-compose -f docker-compose.production.yml exec napoleon python -c "
+docker-compose exec cai python -c "
 import sys
-sys.path.append('/app/src')
+sys.path.append('/opt/cai/src')
 import cai
 print('🤖 Napoleon ML Engine ready for training!')
 "
@@ -102,17 +145,17 @@ print('🤖 Napoleon ML Engine ready for training!')
 #### Start Web Interface (Optional)
 ```bash
 # Launch Napoleon's web interface
-docker-compose -f docker-compose.production.yml --profile web up -d
-# Access at: http://localhost:8081
+docker-compose --profile web up -d
+# Access at: http://localhost:8080
 ```
 
 #### View Logs and Monitor
 ```bash
 # Real-time monitoring
-docker-compose -f docker-compose.production.yml logs -f napoleon
+docker-compose logs -f cai
 
 # System status
-docker-compose -f docker-compose.production.yml ps
+docker-compose ps
 ```
 
 ### 🛡️ **Deployment Features**
@@ -133,19 +176,46 @@ For advanced configuration, troubleshooting, and customization options, see our 
 
 ```bash
 # Stop Napoleon
-docker-compose -f docker-compose.production.yml down
+docker-compose down
 
 # Restart Napoleon
-docker-compose -f docker-compose.production.yml restart
+docker-compose restart
 
 # View system status
-docker-compose -f docker-compose.production.yml ps
+docker-compose ps
+
+# View logs
+docker-compose logs -f cai
 
 # Clean rebuild
-./deploy-production.sh --clean
+./deploy.sh --build-only
+
+# Access container shell
+docker-compose exec cai bash
 
 # Backup data
-docker run --rm -v napoleon_data:/data -v $(pwd):/backup alpine tar czf /backup/napoleon-backup.tar.gz -C /data .
+docker run --rm -v cai_ml_models:/data -v $(pwd):/backup alpine tar czf /backup/napoleon-backup.tar.gz -C /data .
+
+# Health check
+python monitor.py --mode health
+```
+
+### 🐛 **Troubleshooting Commands**
+
+```bash
+# If Docker 28.x build issues:
+./build-manual.sh
+
+# Force clean rebuild:
+docker-compose down --volumes --remove-orphans
+docker system prune -f
+./deploy.sh
+
+# Check Docker version:
+docker version
+
+# View detailed logs:
+docker-compose logs --tail=100 cai
 ```
 
 ## 📋 **Original CAI Framework Foundation**
