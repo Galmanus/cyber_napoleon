@@ -69,7 +69,7 @@ COPY --chown=cai:cai data/ml_models/ ./data/ml_models/
 COPY --chown=cai:cai .env ./
 
 # Set Python path
-ENV PYTHONPATH="${CAI_HOME}/src:${PYTHONPATH}"
+ENV PYTHONPATH="/opt/cai/src"
 ENV PATH="/home/cai/.local/bin:${PATH}"
 
 # Expose ports (if needed for future web interface)

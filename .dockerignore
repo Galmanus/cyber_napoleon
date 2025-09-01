@@ -1,0 +1,88 @@
+# Git and version control
+.git
+.github
+.gitlab-ci.yml
+
+# Development files
+.vscode
+.devcontainer
+.pytest_cache
+.mypy_cache
+.ruff_cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache
+
+# Documentation
+docs/
+*.md.backup
+README_*.md
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments (we install in container)
+venv/
+.venv/
+cai_env/
+
+# Temporary files
+*.tmp
+*.temp
+nohup.out
+*.swp
+*.swo
+*~
+
+# Logs and data (will be mounted as volumes)
+logs/
+*.log
+reports/
+output/
+gospider_*/
+*.gnmap
+*.xml
+
+# Large data files (these should be mounted at runtime)
+*.txt
+*.json
+*.csv
+subdomains_*
+*_crawl.txt
+*_results.txt
+*_output
+get-pip.py
+
+# Config templates (we need the actual files, not templates)
+*.example
+# But ensure our required files are included
+!agents.yml
+!.env
+!pyproject.toml
+!requirements.txt

@@ -52,6 +52,55 @@ check_dependencies() {
     success "All dependencies are installed."
 }
 
+# Check required configuration files
+check_config_files() {
+    log "Checking required configuration files..."
+    
+    local missing_files=()
+    
+    # Check agents.yml
+    if [[ ! -f "agents.yml" ]]; then
+        missing_files+=("agents.yml")
+        if [[ -f "agents.yml.example" ]]; then
+            warning "agents.yml missing, but agents.yml.example found. Copying..."
+            cp agents.yml.example agents.yml
+            success "Created agents.yml from template."
+        fi
+    fi
+    
+    # Check .env
+    if [[ ! -f ".env" ]]; then
+        missing_files+=(" .env")
+        if [[ -f ".env.example" ]]; then
+            warning ".env missing, but .env.example found. Please review and copy:"
+            echo "  cp .env.example .env"
+            echo "  # Edit .env with your API keys and configuration"
+        fi
+    fi
+    
+    # Check critical source directories
+    if [[ ! -d "src" ]]; then
+        error "src/ directory not found. This is required for CAI framework."
+        missing_files+=("src/")
+    fi
+    
+    if [[ ! -f "pyproject.toml" ]]; then
+        error "pyproject.toml not found. This is required for Python dependencies."
+        missing_files+=("pyproject.toml")
+    fi
+    
+    if [[ ${#missing_files[@]} -gt 0 ]]; then
+        error "Missing required files for Docker build:"
+        for file in "${missing_files[@]}"; do
+            echo "  - $file"
+        done
+        error "Please ensure all required files exist before building."
+        exit 1
+    fi
+    
+    success "All required configuration files are present."
+}
+
 # Create required directories
 create_directories() {
     log "Creating required directories..."
@@ -182,11 +231,13 @@ main() {
     case "${1:-}" in
         --build-only)
             check_dependencies
+            check_config_files
             create_directories
             build_image
             ;;
         --deploy-only)
             check_dependencies
+            check_config_files
             create_directories
             deploy
             health_check
@@ -210,6 +261,7 @@ main() {
         "")
             log "Starting full CAI deployment process..."
             check_dependencies
+            check_config_files
             create_directories
             build_image
             deploy
