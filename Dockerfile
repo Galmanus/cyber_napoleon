@@ -53,51 +53,38 @@ COPY --chown=cai:cai agents.yml ./
 COPY --chown=cai:cai *.md ./
 COPY --chown=cai:cai pyproject.toml ./
 
-# Install Python dependencies from pyproject.toml
-RUN python -m pip install --user --upgrade pip
-
-# Install core CAI dependencies with ML support (matching pyproject.toml)
-RUN python -m pip install --user \
-    folium \
-    matplotlib \
-    numpy \
-    pandas \
-    openai==1.75.0 \
-    pydantic \
-    griffe \
-    typing-extensions \
-    requests \
-    types-requests \
-    openinference-instrumentation-openai \
-    wasabi \
-    rich \
-    prompt-toolkit \
-    python-dotenv \
-    litellm \
-    mako \
-    mcp \
-    mkdocs \
-    mkdocs-material \
-    paramiko \
-    dnspython \
-    flask \
-    networkx \
-    PyPDF2 \
-    scikit-learn \
-    joblib \
-    pytz \
-    seaborn \
-    httpx \
-    click \
-    pyyaml \
-    beautifulsoup4 \
-    aiohttp \
-    fastapi \
-    uvicorn \
-    lxml \
-    jinja2 \
-    anthropic \
-    python-multipart
+# Install Python dependencies - COMPLETE Napoleon dependencies
+RUN python -m pip install --user --upgrade pip \
+    # Core ML and data science
+    && python -m pip install --user scikit-learn pandas numpy matplotlib seaborn \
+    # AI and LLM libraries
+    && python -m pip install --user litellm==1.75.3 httpx asyncio anthropic openai==1.75.0 \
+    # UI and console
+    && python -m pip install --user rich click pyyaml requests beautifulsoup4 \
+    # Web framework
+    && python -m pip install --user aiohttp fastapi uvicorn flask \
+    # CAI specific dependencies
+    && python -m pip install --user mcp lxml jinja2 python-dotenv \
+    && python -m pip install --user python-multipart pydantic typing-extensions \
+    # Missing dependencies that were causing issues
+    && python -m pip install --user griffe wasabi mako colorama \
+    && python -m pip install --user dnspython dotenv folium branca xyzservices \
+    && python -m pip install --user networkx types-requests \
+    && python -m pip install --user mkdocs mkdocs-material mkdocs-get-deps \
+    && python -m pip install --user ghp-import markdown mergedeep pathspec \
+    && python -m pip install --user pyyaml-env-tag watchdog platformdirs \
+    && python -m pip install --user babel backrefs mkdocs-material-extensions \
+    && python -m pip install --user paginate pymdown-extensions \
+    && python -m pip install --user openinference-instrumentation-openai \
+    && python -m pip install --user openinference-instrumentation \
+    && python -m pip install --user openinference-semantic-conventions \
+    && python -m pip install --user paramiko bcrypt cryptography invoke pynacl cffi pycparser \
+    && python -m pip install --user prompt-toolkit wcwidth pypdf2 \
+    && python -m pip install --user opentelemetry-api opentelemetry-instrumentation \
+    && python -m pip install --user opentelemetry-semantic-conventions wrapt \
+    && python -m pip install --user opentelemetry-sdk blinker itsdangerous werkzeug \
+    # Install CAI framework itself
+    && python -m pip install --user -e .
 
 # Copy ML models if they exist
 COPY --chown=cai:cai data/ml_models/ ./data/ml_models/

@@ -57,7 +57,7 @@ def get_command_shadow(text):
 def create_prompt_style():
     """Create a style for the CLI."""
     return Style.from_dict({
-        'prompt': 'bold cyan',
+        'prompt': 'bold #FFD700',  # Imperial gold for NAPOLEON>
         'completion-menu': 'bg:#2b2b2b #ffffff',
         'completion-menu.completion': 'bg:#2b2b2b #ffffff',
         'completion-menu.completion.current': 'bg:#004b6b #ffffff',
@@ -98,7 +98,7 @@ async def get_user_input(
 
     # Create a prompt session
     session = PromptSession(
-        [('class:prompt', 'Napoleon> ')],
+        [('class:prompt', 'NAPOLEON> ')],
         completer=command_completer,
         style=create_prompt_style(),
         history=FileHistory(str(history_file)),
