@@ -131,6 +131,21 @@ alias docker=podman
 docker-compose exec cai bash
 ```
 
+#### Access Napoleon CLI Interface
+```bash
+# Inside the container, run Napoleon CLI
+python /opt/cai/src/cai/cli.py --help
+
+# Start Napoleon interactive session
+python /opt/cai/src/cai/cli.py
+```
+
+#### Napoleon CLI Features
+- **Imperial Gold Prompt**: Professional `NAPOLEON>` prompt in imperial gold (#FFD700)
+- **Clean Interface**: No emojis or external advertising - pure cybersecurity focus
+- **Napoleon Branding**: Complete transformation from CAI to Napoleon throughout
+- **Professional Commands**: All help text and commands reflect Napoleon branding
+
 #### Train ML Models
 ```bash
 # Train Napoleon's ML engine on cybersecurity data
@@ -242,6 +257,13 @@ Napoleon is built upon the [original CAI framework](https://github.com/aliasrobo
 ## 🚀 **Napoleon's Major Extensions**
 
 **Napoleon significantly extends CAI** with **60+ custom tools and advanced capabilities** developed by [Manuel Guilherme](https://github.com/Galmanus):
+
+### 🎨 **Interface & Branding Customization**
+- **Imperial CLI Interface**: Completely redesigned command interface
+- **Professional Napoleon Branding**: Golden imperial prompt (NAPOLEON>) replacing CAI
+- **Clean Banner Design**: Professional, advertising-free banner with imperial styling
+- **Command Reference**: All help text and command explanations Napoleon-branded
+- **Dependency Management**: Complete Python dependencies installation in Docker
 
 ### 🛡️ **Complete Cybersecurity Arsenal (Napoleon's Additions)**
 - **Reconnaissance**: nmap, amass, subfinder, gospider, nuclei, httpx, katana
