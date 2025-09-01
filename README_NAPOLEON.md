@@ -40,7 +40,7 @@ Napoleon **extends and enhances** the original CAI framework with:
 │                    NAPOLEON = CAI + Extensions                  │
 ├─────────────────┬─────────────────┬─────────────────────────────┤
 │   Original CAI  │   ML Engine     │   Production Layer          │
-│   - 63+ Tools   │   - 4 Algorithms│   - Docker Containers       │
+│   - Basic Tools │   - 4 Algorithms│   - Docker Containers       │
 │   - Agents      │   - 43 Features │   - Kubernetes Support      │
 │   - CLI         │   - Training    │   - Monitoring Stack        │
 │   - Workflows   │   - Predictions │   - Security Hardening      │

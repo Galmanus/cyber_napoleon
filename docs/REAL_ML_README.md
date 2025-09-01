@@ -37,7 +37,7 @@ Every time you use CAI, the system:
                                     ▼
 ┌─────────────────────┐    ┌──────────────────────┐    ┌─────────────────────┐
 │   Prediction        │◀───│  Ensemble Voting     │◀───│   Execute Command   │
-│  "successful_recon" │    │  (Majority Decision)  │    │   Record Results    │
+│  "successful_recon" │    │  (Majority Decision) │    │   Record Results    │
 │  Confidence: 0.87   │    └──────────────────────┘    └─────────────────────┘
 └─────────────────────┘
 ```
