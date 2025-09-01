@@ -206,6 +206,10 @@ python monitor.py --mode health
 # If Docker 28.x build issues:
 ./build-manual.sh
 
+# If container name conflicts:
+docker rm -f cai-ml-system cai-web-interface
+./deploy.sh
+
 # Force clean rebuild:
 docker-compose down --volumes --remove-orphans
 docker system prune -f
@@ -216,6 +220,12 @@ docker version
 
 # View detailed logs:
 docker-compose logs --tail=100 cai
+
+# Complete cleanup (nuclear option):
+docker-compose down --volumes --remove-orphans
+docker rm -f $(docker ps -aq) 2>/dev/null || true
+docker system prune -af
+./deploy.sh
 ```
 
 ## 📋 **Original CAI Framework Foundation**
