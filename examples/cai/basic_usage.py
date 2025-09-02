@@ -8,15 +8,17 @@ import sys
 import time
 import asyncio
 from cai.sdk.agents import Runner, Agent, OpenAIChatCompletionsModel, set_tracing_disabled
-from openai import AsyncOpenAI
 from cai.sdk.agents import function_tool
-from cai.tools.common import run_command 
+from cai.tools.common import run_command
+from cai.util.openai_helper import create_openai_client, get_model_name
 
 
 @function_tool
 def execute_cli_command(command: str) -> str:
     return run_command(command)
 
+
+model_name = get_model_name()
 
 ctf_agent = Agent(
     name="CTF agent",
@@ -26,8 +28,8 @@ ctf_agent = Agent(
         execute_cli_command,
     ],
     model=OpenAIChatCompletionsModel(
-        model= os.getenv('CAI_MODEL', "qwen2.5:14b"),
-        openai_client=AsyncOpenAI(),
+        model=model_name,
+        openai_client=create_openai_client(model_name),
     )
 )
 async def main():

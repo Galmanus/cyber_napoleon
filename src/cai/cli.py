@@ -674,21 +674,44 @@ def run_cai_cli(
                     if os.getenv("CAI_DEBUG", "1") == "2":
                         console.print(f"[red]Error switching agent: {str(e)}[/red]")
 
+            # ============================================================
+            # ROBUST USER INPUT HANDLING WITH COROUTINE SAFETY
+            # ============================================================
+            
+            def ensure_user_input_is_string(input_value):
+                """Ensure user input is always a string, handling coroutines and other types."""
+                # Handle coroutine objects
+                if asyncio.iscoroutine(input_value):
+                    input_value = asyncio.run(input_value)
+                
+                # Handle non-string types
+                if not isinstance(input_value, str):
+                    input_value = str(input_value) if input_value is not None else ""
+                
+                # Final safety check
+                if not isinstance(input_value, str):
+                    input_value = ""
+                    
+                return input_value
+            
+            # Get user input based on conditions
             if not force_until_flag and ctf_init != 0:
                 # Get user input with command completion and history
-                user_input = get_user_input(
+                raw_user_input = get_user_input(
                     command_completer, kb, history_file, get_toolbar_with_refresh, current_text
                 )
-
+                user_input = ensure_user_input_is_string(raw_user_input)
             else:
-                user_input = messages_ctf
+                user_input = ensure_user_input_is_string(messages_ctf)
                 ctf_init = 1
+            
             idle_time += time.time() - idle_start_time
 
             # Stop measuring user idle time and start measuring active time
             stop_idle_timer()
             start_active_timer()
             
+            # Safe strip call - user_input is guaranteed to be a string
             if not user_input.strip():
                 user_input = "User input is empty, maybe wants to continue"  # Set a default message to continue the conversation
 

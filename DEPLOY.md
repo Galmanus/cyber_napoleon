@@ -99,11 +99,35 @@ MEMORY_LIMIT=8G
 CPU_LIMIT=4.0
 ```
 
-### API Keys Not Working?
-Edit `.env` file:
+### API Keys Configuration
+Napoleon supports multiple AI providers. Edit `.env` file:
+
+**For Gemini (Recommended):**
 ```bash
-OPENAI_API_KEY=your_key_here
-ANTHROPIC_API_KEY=your_key_here
+# Gemini Configuration (Google AI)
+GEMINI_API_KEY="AIzaSy..."
+CAI_MODEL="gemini/gemini-2.5-flash"
+
+# Required placeholder for framework compatibility
+OPENAI_API_KEY="sk-1234"
+```
+
+**For OpenAI:**
+```bash
+OPENAI_API_KEY="sk-..."
+CAI_MODEL="gpt-4"
+```
+
+**For OpenRouter:**
+```bash
+OPENROUTER_API_KEY="sk-or-v1-..."
+CAI_MODEL="openrouter/mistralai/mistral-small-3.2-24b-instruct:free"
+```
+
+**For Anthropic (Claude):**
+```bash
+ANTHROPIC_API_KEY="sk-ant-..."
+CAI_MODEL="claude-3-sonnet-20240229"
 ```
 
 ## ✅ Testing Your Deployment

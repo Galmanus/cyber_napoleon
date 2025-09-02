@@ -2,8 +2,7 @@
 import os
 from dotenv import load_dotenv
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
-from openai import AsyncOpenAI
-from cai.util import load_prompt_template, create_system_prompt_renderer
+from cai.util import load_prompt_template, create_system_prompt_renderer, create_openai_client, get_model_name_openai
 from cai.tools.reconnaissance.generic_linux_command import (  # pylint: disable=import-error # noqa: E501
     generic_linux_command
 )
@@ -36,8 +35,8 @@ retester_agent = Agent(
                    eliminating false positives.""",
     tools=tools,
     model=OpenAIChatCompletionsModel(
-        model=os.getenv('CAI_MODEL', "alias0"),
-        openai_client=AsyncOpenAI(),
+        model=get_model_name_openai(),
+        openai_client=create_openai_client(get_model_name_openai()),
     )
 )
 

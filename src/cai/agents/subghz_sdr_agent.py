@@ -2,8 +2,7 @@
 import os
 from dotenv import load_dotenv
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
-from openai import AsyncOpenAI
-from cai.util import load_prompt_template  # Add this import
+from cai.util import load_prompt_template, create_openai_client, get_model_name_openai
 from cai.tools.command_and_control.sshpass import (  # pylint: disable=import-error # noqa: E501
     run_ssh_command_with_credentials
 )
@@ -43,7 +42,7 @@ subghz_sdr_agent = Agent(
                    automotive, industrial, and wireless security applications.""",
     tools=functions,
     model=OpenAIChatCompletionsModel(
-        model=os.getenv('CAI_MODEL', "alias0"),
-        openai_client=AsyncOpenAI(),
+        model=get_model_name_openai(),
+        openai_client=create_openai_client(get_model_name_openai()),
     )
 )

@@ -8,6 +8,7 @@ import dns.resolver  # pylint: disable=import-error
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
 from cai.tools.misc.cli_utils import execute_cli_command
 from cai.sdk.agents import function_tool
+from cai.util import create_openai_client
 
 
 
@@ -116,6 +117,6 @@ dns_smtp_agent = Agent(
     tools=[check_mail_spoofing_vulnerability, execute_cli_command],
     model=OpenAIChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
-        openai_client=AsyncOpenAI(),
+        openai_client=create_openai_client(os.getenv('CAI_MODEL', "alias0")),
     )
 )

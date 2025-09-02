@@ -2,8 +2,7 @@
 import os
 from dotenv import load_dotenv
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
-from openai import AsyncOpenAI
-from cai.util import load_prompt_template  # Add this import
+from cai.util import load_prompt_template, create_openai_client  # Add this import
 
 from cai.tools.reconnaissance.generic_linux_command import (  # pylint: disable=import-error # noqa: E501
     generic_linux_command
@@ -32,6 +31,6 @@ reporting_agent = Agent(
     tools=functions,
     model=OpenAIChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
-        openai_client=AsyncOpenAI(),
+        openai_client=create_openai_client(os.getenv('CAI_MODEL', "alias0")),
     )
 )

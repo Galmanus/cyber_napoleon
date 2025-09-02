@@ -2,8 +2,8 @@
 import os
 from dotenv import load_dotenv
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
-from openai import AsyncOpenAI
 from cai.util import load_prompt_template  # Add this import
+from cai.util.openai_helper import create_openai_client, get_model_name
 from cai.tools.command_and_control.sshpass import (  # pylint: disable=import-error # noqa: E501
     run_ssh_command_with_credentials
 )
@@ -35,6 +35,8 @@ if os.getenv('PERPLEXITY_API_KEY'):
     functions.append(make_web_search_with_explanation)
     
 # Create the agent
+model_name = get_model_name()
+
 wifi_security_agent = Agent(
     name="Wi-Fi Security Tester",
     instructions=wifi_security_agent_system_prompt,
@@ -42,7 +44,7 @@ wifi_security_agent = Agent(
                    Specializes in wireless attacks, password recovery, and communication disruption.""",
     tools=functions,
     model=OpenAIChatCompletionsModel(
-        model=os.getenv('CAI_MODEL', "alias0"),
-        openai_client=AsyncOpenAI(),
+        model=model_name,
+        openai_client=create_openai_client(model_name),
     )
 )

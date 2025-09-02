@@ -8,11 +8,9 @@ It includes:
 
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
 from cai.tools.reconnaissance.generic_linux_command import generic_linux_command
-from openai import AsyncOpenAI
-import os
-from dotenv import load_dotenv
 
 from cai.util import load_prompt_template, create_system_prompt_renderer
+from cai.util.openai_helper import create_openai_client, get_model_name
 from cai.tools.reconnaissance.exec_code import (
     execute_code
 )
@@ -31,8 +29,7 @@ tools = [
 ]
 
 
-load_dotenv()
-model_name = os.getenv("CAI_MODEL", "alias0")
+model_name = get_model_name()
 
 app_logic_mapper = Agent(
     name="AppLogicMapper",
@@ -41,7 +38,7 @@ app_logic_mapper = Agent(
     tools=tools,
     model=OpenAIChatCompletionsModel(
         model=model_name,
-        openai_client=AsyncOpenAI(),
+        openai_client=create_openai_client(model_name),
     ),
 )
 
@@ -61,7 +58,7 @@ android_sast = Agent(
         ],
     model=OpenAIChatCompletionsModel(
         model=model_name,
-        openai_client=AsyncOpenAI(),
+        openai_client=create_openai_client(model_name),
     ),
 )
 

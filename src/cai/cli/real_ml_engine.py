@@ -70,10 +70,14 @@ class CybersecurityFeatureExtractor(BaseEstimator, TransformerMixin):
     """Extract numerical features from cybersecurity interactions."""
     
     def __init__(self):
+        # Initialize TF-IDF vectorizer for text features
         self.tfidf_vectorizer = TfidfVectorizer(
-            max_features=1000, 
-            stop_words='english',
-            ngram_range=(1, 2)
+            max_features=20,
+            stop_words=None,  # Don't remove stop words for cybersecurity text
+            lowercase=True,
+            ngram_range=(1, 2),
+            min_df=1,  # Allow single occurrence words
+            token_pattern=r'\b\w+\b'  # Include all word tokens
         )
         self.fitted = False
     
@@ -85,11 +89,26 @@ class CybersecurityFeatureExtractor(BaseEstimator, TransformerMixin):
         # Fit text vectorizer if text columns exist
         text_data = []
         for _, row in X.iterrows():
-            text = f"{row.get('user_input', '')} {row.get('response', '')}"
-            text_data.append(text)
+            # Use correct column names for cybersecurity data
+            input_text = str(row.get('input_text', row.get('user_input', '')))
+            output_text = str(row.get('output_text', row.get('response', '')))
+            text = f"{input_text} {output_text}".strip()
+            if text:  # Only add non-empty text
+                text_data.append(text)
         
-        if text_data:
-            self.tfidf_vectorizer.fit(text_data)
+        # Filter out empty text and ensure we have valid content
+        valid_text_data = [text for text in text_data if text.strip() and len(text.strip()) > 0]
+        
+        if valid_text_data:
+            try:
+                self.tfidf_vectorizer.fit(valid_text_data)
+            except ValueError:
+                # If TF-IDF still fails, create a simple vectorizer without it
+                print("Warning: TF-IDF vectorizer failed, disabling text features")
+                self.tfidf_vectorizer = None
+        else:
+            # No valid text data, disable TF-IDF
+            self.tfidf_vectorizer = None
         
         self.fitted = True
         return self
@@ -125,13 +144,13 @@ class CybersecurityFeatureExtractor(BaseEstimator, TransformerMixin):
             feature_dict['used_exploit'] = 1.0 if any('exploit' in str(tool).lower() for tool in tools_used) else 0.0
             
             # 4. INPUT/OUTPUT COMPLEXITY FEATURES
-            user_input = str(row.get('user_input', ''))
-            response = str(row.get('response', ''))
+            input_text = str(row.get('input_text', row.get('user_input', '')))
+            output_text = str(row.get('output_text', row.get('response', '')))
             
-            feature_dict['input_length'] = float(len(user_input))
-            feature_dict['output_length'] = float(len(response))
-            feature_dict['input_words'] = float(len(user_input.split()))
-            feature_dict['output_words'] = float(len(response.split()))
+            feature_dict['input_length'] = float(len(input_text))
+            feature_dict['output_length'] = float(len(output_text))
+            feature_dict['input_words'] = float(len(input_text.split()))
+            feature_dict['output_words'] = float(len(output_text.split()))
             
             # 5. CYBERSECURITY KEYWORD FEATURES
             cyber_keywords = {
@@ -144,7 +163,7 @@ class CybersecurityFeatureExtractor(BaseEstimator, TransformerMixin):
                 'password': ['password', 'passwd', 'login', 'auth']
             }
             
-            combined_text = f"{user_input} {response}".lower()
+            combined_text = f"{input_text} {output_text}".lower()
             for category, keywords in cyber_keywords.items():
                 feature_dict[f'has_{category}'] = 1.0 if any(kw in combined_text for kw in keywords) else 0.0
             
@@ -156,14 +175,19 @@ class CybersecurityFeatureExtractor(BaseEstimator, TransformerMixin):
             feature_dict['has_ip_addresses'] = 1.0 if re.search(ip_pattern, combined_text) else 0.0
             feature_dict['has_port_numbers'] = 1.0 if re.search(port_pattern, combined_text) else 0.0
             
-            # 7. TEXT SIMILARITY FEATURES (using TF-IDF)
-            try:
-                text_features = self.tfidf_vectorizer.transform([combined_text]).toarray()[0]
-                # Use top 20 TF-IDF features
-                for i, val in enumerate(text_features[:20]):
-                    feature_dict[f'tfidf_{i}'] = float(val)
-            except:
-                # If TF-IDF fails, add zeros
+            # 7. TF-IDF TEXT FEATURES
+            if self.tfidf_vectorizer is not None:
+                try:
+                    text_features = self.tfidf_vectorizer.transform([combined_text]).toarray()[0]
+                    # Use top 20 TF-IDF features
+                    for i, val in enumerate(text_features[:20]):
+                        feature_dict[f'tfidf_{i}'] = float(val)
+                except:
+                    # If TF-IDF fails, add zeros
+                    for i in range(20):
+                        feature_dict[f'tfidf_{i}'] = 0.0
+            else:
+                # TF-IDF disabled, add zeros
                 for i in range(20):
                     feature_dict[f'tfidf_{i}'] = 0.0
             

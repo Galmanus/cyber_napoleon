@@ -2,7 +2,7 @@
 import os
 from dotenv import load_dotenv
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
-from openai import AsyncOpenAI
+from cai.util.openai_helper import create_openai_client, get_model_name
 # from cai.tools.command_and_control.sshpass import (  # pylint: disable=import-error # noqa: E501
 #     run_ssh_command_with_credentials
 # )
@@ -20,7 +20,6 @@ from cai.tools.reconnaissance.exec_code import (  # pylint: disable=import-error
 from cai.util import load_prompt_template, create_system_prompt_renderer
 
 load_dotenv()
-model_name = os.getenv("CAI_MODEL", "alias0")
 # Prompts
 redteam_agent_system_prompt = load_prompt_template("prompts/system_red_team_agent.md")
 # Define tools list based on available API keys
@@ -35,6 +34,8 @@ if os.getenv('PERPLEXITY_API_KEY'):
     tools.append(make_web_search_with_explanation)
     
 
+model_name = get_model_name()
+
 redteam_agent = Agent(
     name="Red Team Agent",
     description="""Agent that mimics a red teamer in a security assessment.
@@ -43,7 +44,7 @@ redteam_agent = Agent(
     tools=tools,
     model=OpenAIChatCompletionsModel(
         model=model_name,
-        openai_client=AsyncOpenAI(),
+        openai_client=create_openai_client(model_name),
     ),
 )
 
