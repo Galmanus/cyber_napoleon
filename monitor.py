@@ -16,11 +16,19 @@ import asyncio
 import json
 import logging
 import os
-import psutil
+import sys
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any
+
+# Try to import psutil, fall back to basic functionality if not available
+try:
+    import psutil
+    PSUTIL_AVAILABLE = True
+except ImportError:
+    PSUTIL_AVAILABLE = False
+    print("Warning: psutil not available, some monitoring features will be disabled")
 
 # Configure logging
 logging.basicConfig(
@@ -181,6 +189,13 @@ class CAIMonitor:
     async def _check_resources(self) -> Dict[str, Any]:
         """Check system resource usage."""
         try:
+            if not PSUTIL_AVAILABLE:
+                return {
+                    "status": "degraded",
+                    "message": "Resource monitoring unavailable (psutil not installed)",
+                    "alerts": []
+                }
+            
             cpu_percent = psutil.cpu_percent(interval=1)
             memory = psutil.virtual_memory()
             disk = psutil.disk_usage('/')
@@ -239,6 +254,12 @@ class CAIMonitor:
     async def _collect_system_metrics(self) -> Dict[str, Any]:
         """Collect system-level metrics."""
         try:
+            if not PSUTIL_AVAILABLE:
+                return {
+                    "error": "psutil not available",
+                    "message": "System metrics collection unavailable"
+                }
+            
             return {
                 "cpu": {
                     "percent": psutil.cpu_percent(interval=1),
@@ -312,6 +333,12 @@ class CAIMonitor:
     async def _collect_performance_metrics(self) -> Dict[str, Any]:
         """Collect performance metrics."""
         try:
+            if not PSUTIL_AVAILABLE:
+                return {
+                    "error": "psutil not available",
+                    "message": "Performance metrics collection unavailable"
+                }
+            
             # Get process info for CAI
             current_process = psutil.Process()
             

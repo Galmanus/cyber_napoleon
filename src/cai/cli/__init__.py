@@ -35,12 +35,36 @@ from .learning_integration import (
 from .enhanced_agent_runner import EnhancedAgentRunner
 from .learning_config import LearningConfig, get_learning_config, setup_learning_environment
 # Import main functions
-from .main import main_refactored
-from .integrated_main import main_with_learning
-from .real_ml_main import main_with_real_ml
-
-# Default to REAL ML main
-main = main_with_real_ml
+# Try to import ML-dependent components, fallback to basic version if they fail
+try:
+    from .main import main_refactored
+    from .integrated_main import main_with_learning
+    from .real_ml_main import main_with_real_ml
+    # Default to REAL ML main if all imports succeed
+    main = main_with_real_ml
+except ImportError as e:
+    # Fallback to basic CLI if ML dependencies are unavailable
+    print(f"Warning: ML features unavailable due to import error: {e}")
+    # Create a simple main function that works without ML dependencies
+    def main():
+        import sys
+        print("CAI Framework - Basic Mode")
+        print("ML features are unavailable due to dependency conflicts")
+        print("Please fix NumPy/pandas/scikit-learn version conflicts to enable full functionality")
+        print("")
+        print("Available commands:")
+        print("  --help      Show this help message")
+        print("  --version   Show version information")
+        
+        if len(sys.argv) > 1:
+            if "--version" in sys.argv:
+                print("CAI Framework v0.5.3")
+            elif "--help" in sys.argv:
+                print("CAI Framework - Cybersecurity AI")
+            else:
+                print(f"Unknown command: {' '.join(sys.argv[1:])}")
+        else:
+            print("Use --help for more information")
 
 __all__ = [
     # Core CLI
