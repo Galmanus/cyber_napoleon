@@ -10,7 +10,7 @@ import os
 from dotenv import load_dotenv
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
 from cai.util import load_prompt_template, create_system_prompt_renderer
-from cai.util.openai_helper import create_openai_client, get_model_name
+from cai.openai_helper import create_openai_client, get_model_name
 from cai.tools.reconnaissance.generic_linux_command import generic_linux_command
 from cai.tools.reconnaissance.exec_code import execute_code
 from cai.tools.web.search_web import make_web_search_with_explanation

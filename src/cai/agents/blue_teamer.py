@@ -6,7 +6,7 @@ SSH_USER
 import os
 from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
 from cai.util import load_prompt_template, create_system_prompt_renderer
-from cai.util.openai_helper import create_openai_client, get_model_name
+from cai.openai_helper import create_openai_client, get_model_name
 from dotenv import load_dotenv
 from cai.tools.command_and_control.sshpass import (  # pylint: disable=import-error # noqa: E501
     run_ssh_command_with_credentials

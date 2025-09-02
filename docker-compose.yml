@@ -8,18 +8,23 @@ services:
     hostname: cai-framework
     restart: unless-stopped
     
-    # Environment variables
+    # Environment variables from .env file
+    env_file:
+      - .env
+    
     environment:
-      - CAI_MODEL=gemini/gemini-2.5-flash
+      - CAI_MODEL=${CAI_MODEL:-gemini/gemini-2.5-flash}
       - CAI_LOG_LEVEL=INFO
       - CAI_ENV=production
+      - PYTHONPATH=/opt/cai/src
     
     # Persistent volumes
     volumes:
       # ML models and learning data
       - cai_ml_models:/opt/cai/data/ml_models
       - cai_knowledge_base:/opt/cai/data/knowledge_base
-      - cai_logs:/opt/cai/logs
+      # Logs managed internally by container
+      # - cai_logs:/opt/cai/logs
       # Configuration
       - ./config:/opt/cai/config:ro
     
@@ -37,17 +42,10 @@ services:
           cpus: '0.5'
           memory: 1G
     
-    # Security (removed no-new-privileges for compatibility)
-    # security_opt:
-    #   - no-new-privileges:true
-    
     # Interactive mode
     stdin_open: true
     tty: true
     
-    # Custom command for production
-    # command: ["python", "-m", "cai.cli"]
-
   # Optional: Web interface (future)
   cai-web:
     build:
@@ -63,7 +61,8 @@ services:
       - CAI_MODE=web
     volumes:
       - cai_ml_models:/opt/cai/data/ml_models:ro
-      - cai_logs:/opt/cai/logs
+      # Logs disabled for web interface
+      # - cai_logs:/opt/cai/logs
     networks:
       - cai_network
     # Disabled by default
