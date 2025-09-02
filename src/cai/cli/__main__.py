@@ -6,16 +6,23 @@ Entry point for running the CAI CLI as a module.
 """
 
 try:
-    # Try to import the main function from the module
-    from . import main
-    if callable(main):
-        # If main is a function, call it directly
-        main_function = main
+    # Try to import the main function directly
+    from . import main as main_module
+    
+    # Look for available main functions
+    if hasattr(main_module, "main_refactored"):
+        main_function = main_module.main_refactored
+    elif hasattr(main_module, "main"):
+        main_function = main_module.main
+    elif callable(main_module):
+        main_function = main_module
     else:
-        # If main is a module, get the main function from it
-        main_function = getattr(main, 'main', None)
-except ImportError:
-    # Fallback if import fails
+        def main_function():
+            print("Error: No suitable main function found")
+            return 1
+            
+except ImportError as e:
+    print(f"Import error: {e}")
     def main_function():
         print("Error: Could not load CAI CLI")
         return 1
