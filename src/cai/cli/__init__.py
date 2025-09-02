@@ -35,36 +35,44 @@ from .learning_integration import (
 from .enhanced_agent_runner import EnhancedAgentRunner
 from .learning_config import LearningConfig, get_learning_config, setup_learning_environment
 # Import main functions
-# Try to import ML-dependent components, fallback to basic version if they fail
+# Try to import the original CLI with Napoleon> prompt first
 try:
-    from .main import main_refactored
-    from .integrated_main import main_with_learning
-    from .real_ml_main import main_with_real_ml
-    # Default to REAL ML main if all imports succeed
-    main = main_with_real_ml
-except ImportError as e:
-    # Fallback to basic CLI if ML dependencies are unavailable
-    print(f"Warning: ML features unavailable due to import error: {e}")
-    # Create a simple main function that works without ML dependencies
-    def main():
-        import sys
-        print("CAI Framework - Basic Mode")
-        print("ML features are unavailable due to dependency conflicts")
-        print("Please fix NumPy/pandas/scikit-learn version conflicts to enable full functionality")
-        print("")
-        print("Available commands:")
-        print("  --help      Show this help message")
-        print("  --version   Show version information")
-        
-        if len(sys.argv) > 1:
-            if "--version" in sys.argv:
-                print("CAI Framework v0.5.3")
-            elif "--help" in sys.argv:
-                print("CAI Framework - Cybersecurity AI")
+    # Import the original CAI CLI that uses Napoleon> prompt
+    from cai.cli import main as original_main
+    main = original_main
+    print("🏛️ Loaded original NAPOLEON CLI interface")
+except ImportError:
+    # Try ML-dependent components as fallback
+    try:
+        from .main import main_refactored
+        from .integrated_main import main_with_learning
+        from .real_ml_main import main_with_real_ml
+        # Use the refactored main as fallback
+        main = main_refactored
+        print("⚠️  Using fallback CLI (Napoleon interface may not be available)")
+    except ImportError as e:
+        # Final fallback to basic CLI if all ML dependencies are unavailable
+        print(f"Warning: ML features unavailable due to import error: {e}")
+        # Create a simple main function that works without ML dependencies
+        def main():
+            import sys
+            print("CAI Framework - Basic Mode")
+            print("ML features are unavailable due to dependency conflicts")
+            print("Please fix NumPy/pandas/scikit-learn version conflicts to enable full functionality")
+            print("")
+            print("Available commands:")
+            print("  --help      Show this help message")
+            print("  --version   Show version information")
+            
+            if len(sys.argv) > 1:
+                if "--version" in sys.argv:
+                    print("CAI Framework v0.5.3")
+                elif "--help" in sys.argv:
+                    print("CAI Framework - Cybersecurity AI")
+                else:
+                    print(f"Unknown command: {' '.join(sys.argv[1:])}")
             else:
-                print(f"Unknown command: {' '.join(sys.argv[1:])}")
-        else:
-            print("Use --help for more information")
+                print("Use --help for more information")
 
 __all__ = [
     # Core CLI
