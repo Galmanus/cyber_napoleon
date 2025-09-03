@@ -1,0 +1,2302 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/imago.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>🤖 Real Machine Learning System - CAI Framework - CAI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#real-machine-learning-system-cai-framework" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="CAI" class="md-header__button md-logo" aria-label="CAI" data-md-component="logo">
+      
+  <img src="../assets/imago.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CAI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🤖 Real Machine Learning System - CAI Framework
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="CAI" class="md-nav__button md-logo" aria-label="CAI" data-md-component="logo">
+      
+  <img src="../assets/imago.png" alt="logo">
+
+    </a>
+    CAI
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quickstart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_list_of_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Start Building
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Start Building
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Running agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Streaming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handoffs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Handoffs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ⚠️ Tracing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Context management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardrails
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orchestrating multiple agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_1" id="__nav_7_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Agents
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Agents
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/run/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Runner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/tool/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/result/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/stream_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Streaming events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/handoffs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Handoffs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lifecycle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Items
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/run_context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Run context
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/guardrail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardrails
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/model_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/agent_output/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent output
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/function_schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Function schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/models/interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model interface
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/models/openai_chatcompletions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenAI Chat Completions model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/models/openai_responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenAI Responses model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_2" id="__nav_7_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Extensions
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Extensions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/extensions/handoff_filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Handoff filters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref/extensions/handoff_prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Handoff prompt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    More About CAI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            More About CAI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_find_us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Find Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cai_citation_and_acknowledgments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Citation & Acknowledgments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 What It Does
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 What It Does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Functionality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Learning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ml-models-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔬 ML Models Used
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔬 ML Models Used">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-random-forest-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Random Forest Classifier 🌳
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gradient-boosting-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Gradient Boosting Classifier ⚡
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-support-vector-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Support Vector Machine 🎯
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-neural-network-mlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Neural Network (MLP) 🧠
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feature-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Feature Engineering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Feature Engineering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temporal-features-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temporal Features (3)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#successfailure-features-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success/Failure Features (2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-usage-features-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool Usage Features (5)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complexity-features-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complexity Features (4)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cybersecurity-keyword-features-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cybersecurity Keyword Features (7)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-pattern-features-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Pattern Features (2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-similarity-features-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      Text Similarity Features (20)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prediction-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Prediction Categories
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Prediction Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#success-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Categories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-category" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failure Category
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-mode-with-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive Mode with ML
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ml-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      ML Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Performance Monitoring
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Performance Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Performance Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learning-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning Statistics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Directory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-retraining" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Retraining
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hyperparameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hyperparameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Technical Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Technical Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feature-extraction-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feature Extraction Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prediction-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 File Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Example Session
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚨 Important Notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Important Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-is-real-machine-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      This is REAL Machine Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#this-is-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      This is NOT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#models-not-trained-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Models not trained" Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-confidence-predictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Low Confidence Predictions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-validation-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Validation Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤝 Contributing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="real-machine-learning-system-cai-framework">🤖 Real Machine Learning System - CAI Framework</h1>
+<h2 id="overview">🎯 Overview</h2>
+<p>The CAI (Cybersecurity AI) Framework now includes a <strong>REAL Machine Learning System</strong> that learns from cybersecurity interactions and provides intelligent predictions to improve penetration testing effectiveness.</p>
+<p><strong>This is NOT LLM-based pattern matching - this is actual machine learning using scikit-learn algorithms!</strong></p>
+<h2 id="what-it-does">🚀 What It Does</h2>
+<h3 id="core-functionality">Core Functionality</h3>
+<ul>
+<li><strong>Predicts attack success</strong> before execution</li>
+<li><strong>Learns from every interaction</strong> automatically</li>
+<li><strong>Provides actionable advice</strong> based on ML insights</li>
+<li><strong>Improves over time</strong> with more data</li>
+<li><strong>Uses ensemble methods</strong> for robust predictions</li>
+</ul>
+<h3 id="real-time-learning">Real-Time Learning</h3>
+<p>Every time you use CAI, the system:
+1. <strong>Extracts 43 numerical features</strong> from your command
+2. <strong>Predicts likely outcome</strong> using trained ML models
+3. <strong>Shows confidence level</strong> and strategic advice
+4. <strong>Records actual results</strong> for learning
+5. <strong>Retrains models</strong> automatically when sufficient data exists</p>
+<h2 id="architecture">🏗️ Architecture</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1">┌─────────────────────┐    ┌──────────────────────┐    ┌─────────────────────┐
+</span><span id="__span-0-2">│   User Command      │───▶│  Feature Extractor   │───▶│   ML Models         │
+</span><span id="__span-0-3">│  &quot;scan target&quot;      │    │  (43 features)       │    │  • Random Forest    │
+</span><span id="__span-0-4">└─────────────────────┘    └──────────────────────┘    │  • Gradient Boost   │
+</span><span id="__span-0-5">                                                        │  • SVM              │
+</span><span id="__span-0-6">                                                        │  • Neural Network   │
+</span><span id="__span-0-7">                                                        └─────────────────────┘
+</span><span id="__span-0-8">                                    │
+</span><span id="__span-0-9">                                    ▼
+</span><span id="__span-0-10">┌─────────────────────┐    ┌──────────────────────┐    ┌─────────────────────┐
+</span><span id="__span-0-11">│   Prediction        │◀───│  Ensemble Voting     │◀───│   Execute Command   │
+</span><span id="__span-0-12">│  &quot;successful_recon&quot; │    │  (Majority Decision) │    │   Record Results    │
+</span><span id="__span-0-13">│  Confidence: 0.87   │    └──────────────────────┘    └─────────────────────┘
+</span><span id="__span-0-14">└─────────────────────┘
+</span></code></pre></div>
+<h2 id="ml-models-used">🔬 ML Models Used</h2>
+<h3 id="1-random-forest-classifier">1. Random Forest Classifier 🌳</h3>
+<ul>
+<li><strong>Type</strong>: Tree-based ensemble</li>
+<li><strong>Purpose</strong>: Feature importance analysis</li>
+<li><strong>Strengths</strong>: Handles mixed data types, resistant to overfitting</li>
+</ul>
+<h3 id="2-gradient-boosting-classifier">2. Gradient Boosting Classifier ⚡</h3>
+<ul>
+<li><strong>Type</strong>: Boosted decision trees</li>
+<li><strong>Purpose</strong>: Sequential error correction</li>
+<li><strong>Strengths</strong>: High accuracy, good with complex patterns</li>
+</ul>
+<h3 id="3-support-vector-machine">3. Support Vector Machine 🎯</h3>
+<ul>
+<li><strong>Type</strong>: Kernel-based classifier</li>
+<li><strong>Purpose</strong>: Non-linear decision boundaries</li>
+<li><strong>Strengths</strong>: Effective in high-dimensional spaces</li>
+</ul>
+<h3 id="4-neural-network-mlp">4. Neural Network (MLP) 🧠</h3>
+<ul>
+<li><strong>Type</strong>: Multi-layer perceptron</li>
+<li><strong>Purpose</strong>: Complex pattern recognition</li>
+<li><strong>Strengths</strong>: Can learn non-linear relationships</li>
+</ul>
+<h2 id="feature-engineering">📊 Feature Engineering</h2>
+<p>The system automatically extracts <strong>43 numerical features</strong> from each interaction:</p>
+<h3 id="temporal-features-3">Temporal Features (3)</h3>
+<ul>
+<li><code>execution_time</code>: How long the command took</li>
+<li><code>hour_of_day</code>: When the command was executed</li>
+<li><code>day_of_week</code>: Day of the week</li>
+</ul>
+<h3 id="successfailure-features-2">Success/Failure Features (2)</h3>
+<ul>
+<li><code>success</code>: Whether the operation succeeded</li>
+<li><code>error_occurred</code>: If an error was encountered</li>
+</ul>
+<h3 id="tool-usage-features-5">Tool Usage Features (5)</h3>
+<ul>
+<li><code>num_tools</code>: Number of tools used</li>
+<li><code>used_nmap</code>: Whether nmap was used</li>
+<li><code>used_metasploit</code>: Whether Metasploit was used</li>
+<li><code>used_sqlmap</code>: Whether SQLMap was used</li>
+<li><code>used_exploit</code>: Whether exploit tools were used</li>
+</ul>
+<h3 id="complexity-features-4">Complexity Features (4)</h3>
+<ul>
+<li><code>input_length</code>: Length of user input</li>
+<li><code>output_length</code>: Length of system response</li>
+<li><code>input_words</code>: Word count in input</li>
+<li><code>output_words</code>: Word count in output</li>
+</ul>
+<h3 id="cybersecurity-keyword-features-7">Cybersecurity Keyword Features (7)</h3>
+<ul>
+<li><code>has_vulnerability</code>: Contains vulnerability keywords</li>
+<li><code>has_reconnaissance</code>: Contains recon keywords</li>
+<li><code>has_network</code>: Contains network keywords</li>
+<li><code>has_database</code>: Contains database keywords</li>
+<li><code>has_web</code>: Contains web-related keywords</li>
+<li><code>has_privilege</code>: Contains privilege escalation keywords</li>
+<li><code>has_password</code>: Contains credential-related keywords</li>
+</ul>
+<h3 id="network-pattern-features-2">Network Pattern Features (2)</h3>
+<ul>
+<li><code>has_ip_addresses</code>: Contains IP addresses</li>
+<li><code>has_port_numbers</code>: Contains port numbers</li>
+</ul>
+<h3 id="text-similarity-features-20">Text Similarity Features (20)</h3>
+<ul>
+<li><code>tfidf_0</code> to <code>tfidf_19</code>: TF-IDF vectorized text features</li>
+</ul>
+<h2 id="prediction-categories">🎯 Prediction Categories</h2>
+<p>The ML system predicts these outcome categories:</p>
+<h3 id="success-categories">Success Categories</h3>
+<ul>
+<li><code>successful_nmap_recon</code>: Nmap reconnaissance likely to succeed</li>
+<li><code>successful_discovery</code>: General discovery operations</li>
+<li><code>successful_exploit</code>: Exploitation attempts</li>
+<li><code>successful_access</code>: System access operations</li>
+<li><code>successful_privilege_escalation</code>: Privilege escalation</li>
+<li><code>successful_sql_tool</code>: SQL injection tools</li>
+<li><code>successful_metasploit</code>: Metasploit modules</li>
+<li><code>successful_general</code>: General successful operations</li>
+</ul>
+<h3 id="failure-category">Failure Category</h3>
+<ul>
+<li><code>failure</code>: Operation likely to fail</li>
+</ul>
+<h2 id="getting-started">🚀 Getting Started</h2>
+<h3 id="basic-usage">Basic Usage</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><span class="c1"># Run CAI with Real ML (default)</span>
+</span><span id="__span-1-2">cai<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;scan 192.168.1.1 for vulnerabilities&quot;</span>
+</span><span id="__span-1-3">
+</span><span id="__span-1-4"><span class="c1"># Disable ML for this session</span>
+</span><span id="__span-1-5">cai<span class="w"> </span>--no-ml<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;basic scan without ML&quot;</span>
+</span></code></pre></div>
+<h3 id="interactive-mode-with-ml">Interactive Mode with ML</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1">cai
+</span></code></pre></div>
+<p>The system will show:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1">🤖 ML Prediction: successful_nmap_recon
+</span><span id="__span-3-2">🎯 Confidence: 0.87
+</span><span id="__span-3-3">💡 AI Advice: HIGH CONFIDENCE: High success probability for nmap reconnaissance. Consider comprehensive port scanning.
+</span></code></pre></div></p>
+<h3 id="ml-commands">ML Commands</h3>
+<p>In interactive mode, use these ML-specific commands:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><span class="c1"># Check ML system status</span>
+</span><span id="__span-4-2">/ml<span class="w"> </span>status
+</span><span id="__span-4-3">
+</span><span id="__span-4-4"><span class="c1"># Trigger manual training</span>
+</span><span id="__span-4-5">/ml<span class="w"> </span>train
+</span><span id="__span-4-6">
+</span><span id="__span-4-7"><span class="c1"># Optimize hyperparameters</span>
+</span><span id="__span-4-8">/ml<span class="w"> </span>optimize
+</span><span id="__span-4-9">
+</span><span id="__span-4-10"><span class="c1"># Get prediction for specific query</span>
+</span><span id="__span-4-11">/ml<span class="w"> </span>predict<span class="w"> </span><span class="s2">&quot;exploit web application&quot;</span>
+</span><span id="__span-4-12">
+</span><span id="__span-4-13"><span class="c1"># Get ML insights</span>
+</span><span id="__span-4-14">/ml<span class="w"> </span>insights
+</span></code></pre></div>
+<h2 id="performance-monitoring">📈 Performance Monitoring</h2>
+<h3 id="model-performance-metrics">Model Performance Metrics</h3>
+<ul>
+<li><strong>Accuracy</strong>: Overall prediction accuracy</li>
+<li><strong>Cross-validation</strong>: 5-fold CV for robust evaluation</li>
+<li><strong>Confidence scores</strong>: Individual model confidence</li>
+<li><strong>Ensemble voting</strong>: Majority decision from all models</li>
+</ul>
+<h3 id="learning-statistics">Learning Statistics</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1">🤖<span class="w"> </span>Real<span class="w"> </span>Machine<span class="w"> </span>Learning<span class="w"> </span>Engine<span class="w"> </span>Initialized
+</span><span id="__span-5-2"><span class="w">  </span>•<span class="w"> </span>Training<span class="w"> </span>samples:<span class="w"> </span><span class="m">25</span>
+</span><span id="__span-5-3"><span class="w">  </span>•<span class="w"> </span>Models<span class="w"> </span>trained:<span class="w"> </span>True
+</span><span id="__span-5-4"><span class="w">  </span>•<span class="w"> </span>Model<span class="w"> </span>version:<span class="w"> </span><span class="m">1</span>.2.0
+</span><span id="__span-5-5"><span class="w">  </span>•<span class="w"> </span>Feature<span class="w"> </span>count:<span class="w"> </span><span class="m">43</span>
+</span><span id="__span-5-6"><span class="w">  </span>•<span class="w"> </span>Model<span class="w"> </span>Performance:
+</span><span id="__span-5-7"><span class="w">    </span>-<span class="w"> </span>random_forest:<span class="w"> </span><span class="m">0</span>.875<span class="w"> </span>accuracy
+</span><span id="__span-5-8"><span class="w">    </span>-<span class="w"> </span>gradient_boosting:<span class="w"> </span><span class="m">0</span>.825<span class="w"> </span>accuracy
+</span><span id="__span-5-9"><span class="w">    </span>-<span class="w"> </span>svm:<span class="w"> </span><span class="m">0</span>.800<span class="w"> </span>accuracy
+</span><span id="__span-5-10"><span class="w">    </span>-<span class="w"> </span>neural_network:<span class="w"> </span><span class="m">0</span>.850<span class="w"> </span>accuracy
+</span></code></pre></div>
+<h2 id="configuration">🔧 Configuration</h2>
+<h3 id="model-directory">Model Directory</h3>
+<ul>
+<li><strong>Location</strong>: <code>data/ml_models/</code></li>
+<li><strong>Files</strong>: Trained models, scalers, encoders, metadata</li>
+<li><strong>Versioning</strong>: Automatic model versioning system</li>
+</ul>
+<h3 id="auto-retraining">Auto-Retraining</h3>
+<ul>
+<li><strong>Trigger</strong>: Every 50 new samples (minimum 100 total)</li>
+<li><strong>Cross-validation</strong>: 5-fold for model evaluation</li>
+<li><strong>Model saving</strong>: Automatic persistence to disk</li>
+</ul>
+<h3 id="hyperparameters">Hyperparameters</h3>
+<p>Default configuration optimized for cybersecurity data:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><span class="c1"># Random Forest</span>
+</span><span id="__span-6-2"><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+</span><span id="__span-6-3">
+</span><span id="__span-6-4"><span class="c1"># Gradient Boosting  </span>
+</span><span id="__span-6-5"><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+</span><span id="__span-6-6">
+</span><span id="__span-6-7"><span class="c1"># SVM</span>
+</span><span id="__span-6-8"><span class="n">probability</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+</span><span id="__span-6-9">
+</span><span id="__span-6-10"><span class="c1"># Neural Network</span>
+</span><span id="__span-6-11"><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+</span></code></pre></div>
+<h2 id="technical-details">🧪 Technical Details</h2>
+<h3 id="feature-extraction-process">Feature Extraction Process</h3>
+<ol>
+<li><strong>Text Processing</strong>: Extract cybersecurity keywords</li>
+<li><strong>Tool Detection</strong>: Identify tools used in commands</li>
+<li><strong>Pattern Matching</strong>: Find IP addresses, ports, URLs</li>
+<li><strong>TF-IDF Vectorization</strong>: Convert text to numerical features</li>
+<li><strong>Scaling</strong>: StandardScaler for numerical consistency</li>
+</ol>
+<h3 id="training-pipeline">Training Pipeline</h3>
+<ol>
+<li><strong>Data Preparation</strong>: Convert interactions to feature vectors</li>
+<li><strong>Label Encoding</strong>: Transform target categories to numbers</li>
+<li><strong>Feature Scaling</strong>: Normalize numerical features</li>
+<li><strong>Train-Test Split</strong>: 80/20 split with stratification</li>
+<li><strong>Model Training</strong>: Train all 4 models simultaneously</li>
+<li><strong>Cross-Validation</strong>: 5-fold CV for robust metrics</li>
+<li><strong>Model Persistence</strong>: Save to disk with versioning</li>
+</ol>
+<h3 id="prediction-pipeline">Prediction Pipeline</h3>
+<ol>
+<li><strong>Feature Extraction</strong>: Convert new input to feature vector</li>
+<li><strong>Feature Scaling</strong>: Apply saved scaler</li>
+<li><strong>Individual Predictions</strong>: Get prediction from each model</li>
+<li><strong>Ensemble Voting</strong>: Majority vote for final prediction</li>
+<li><strong>Confidence Calculation</strong>: Average of individual confidences</li>
+</ol>
+<h2 id="file-structure">📚 File Structure</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1">src/cai/cli/
+</span><span id="__span-7-2">├── real_ml_engine.py          # Core ML engine with scikit-learn models
+</span><span id="__span-7-3">├── real_ml_integration.py     # Integration with CAI CLI system  
+</span><span id="__span-7-4">├── real_ml_main.py           # Main CLI with ML integration
+</span><span id="__span-7-5">└── enhanced_agent_runner.py   # Agent runner with ML hooks
+</span><span id="__span-7-6">
+</span><span id="__span-7-7">data/
+</span><span id="__span-7-8">├── ml_models/                 # Trained ML models directory
+</span><span id="__span-7-9">│   ├── random_forest_v1.1.0.pkl
+</span><span id="__span-7-10">│   ├── gradient_boosting_v1.1.0.pkl
+</span><span id="__span-7-11">│   ├── svm_v1.1.0.pkl
+</span><span id="__span-7-12">│   ├── neural_network_v1.1.0.pkl
+</span><span id="__span-7-13">│   ├── feature_extractor_v1.1.0.pkl
+</span><span id="__span-7-14">│   ├── scaler_v1.1.0.pkl
+</span><span id="__span-7-15">│   ├── label_encoder_v1.1.0.pkl
+</span><span id="__span-7-16">│   └── metadata_v1.1.0.json
+</span><span id="__span-7-17">└── knowledge_base/            # Legacy (not used by real ML)
+</span></code></pre></div>
+<h2 id="example-session">🔍 Example Session</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1">$<span class="w"> </span>cai<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;scan network for open ports&quot;</span>
+</span><span id="__span-8-2">
+</span><span id="__span-8-3">🤖<span class="w"> </span>Initializing<span class="w"> </span>REAL<span class="w"> </span>Machine<span class="w"> </span>Learning<span class="w"> </span>system...
+</span><span id="__span-8-4">🤖<span class="w"> </span>Real<span class="w"> </span>Machine<span class="w"> </span>Learning<span class="w"> </span>Engine<span class="w"> </span>Initialized
+</span><span id="__span-8-5"><span class="w">  </span>•<span class="w"> </span>Training<span class="w"> </span>samples:<span class="w"> </span><span class="m">15</span>
+</span><span id="__span-8-6"><span class="w">  </span>•<span class="w"> </span>Models<span class="w"> </span>trained:<span class="w"> </span>True
+</span><span id="__span-8-7"><span class="w">  </span>•<span class="w"> </span>Model<span class="w"> </span>version:<span class="w"> </span><span class="m">1</span>.1.0
+</span><span id="__span-8-8"><span class="w">  </span>•<span class="w"> </span>Feature<span class="w"> </span>count:<span class="w"> </span><span class="m">43</span>
+</span><span id="__span-8-9">
+</span><span id="__span-8-10">🚀<span class="w"> </span>Starting<span class="w"> </span>CAI<span class="w"> </span>with<span class="w"> </span>REAL<span class="w"> </span>Machine<span class="w"> </span>Learning...
+</span><span id="__span-8-11">
+</span><span id="__span-8-12">🔥<span class="w"> </span>Running<span class="w"> </span>prompt<span class="w"> </span><span class="m">1</span>/1:<span class="w"> </span>scan<span class="w"> </span>network<span class="w"> </span><span class="k">for</span><span class="w"> </span>open<span class="w"> </span>ports
+</span><span id="__span-8-13">
+</span><span id="__span-8-14">🤖<span class="w"> </span>ML<span class="w"> </span>Prediction:<span class="w"> </span>successful_nmap_recon
+</span><span id="__span-8-15">🎯<span class="w"> </span>Confidence:<span class="w"> </span><span class="m">0</span>.87
+</span><span id="__span-8-16">💡<span class="w"> </span>AI<span class="w"> </span>Advice:<span class="w"> </span>HIGH<span class="w"> </span>CONFIDENCE:<span class="w"> </span>High<span class="w"> </span>success<span class="w"> </span>probability<span class="w"> </span><span class="k">for</span><span class="w"> </span>nmap<span class="w"> </span>reconnaissance.<span class="w"> </span>Consider<span class="w"> </span>comprehensive<span class="w"> </span>port<span class="w"> </span>scanning.
+</span><span id="__span-8-17">
+</span><span id="__span-8-18"><span class="o">[</span>Agent<span class="w"> </span>executes<span class="w"> </span>nmap<span class="w"> </span>scan...<span class="o">]</span>
+</span><span id="__span-8-19">
+</span><span id="__span-8-20">📊<span class="w"> </span>ML<span class="w"> </span>Sample<span class="w"> </span>recorded:<span class="w"> </span>reconnaissance<span class="w"> </span><span class="o">(</span>success<span class="o">)</span>
+</span><span id="__span-8-21">
+</span><span id="__span-8-22">🎯<span class="w"> </span>Real<span class="w"> </span>ML<span class="w"> </span>Results:
+</span><span id="__span-8-23"><span class="w">  </span>•<span class="w"> </span>Session<span class="w"> </span>ID:<span class="w"> </span>real_ml_session_1234567890
+</span><span id="__span-8-24"><span class="w">  </span>•<span class="w"> </span>Interactions<span class="w"> </span>recorded:<span class="w"> </span><span class="m">1</span>
+</span><span id="__span-8-25"><span class="w">  </span>•<span class="w"> </span>Training<span class="w"> </span>triggered:<span class="w"> </span>No
+</span><span id="__span-8-26"><span class="w">  </span>•<span class="w"> </span>Total<span class="w"> </span>training<span class="w"> </span>samples:<span class="w"> </span><span class="m">16</span>
+</span><span id="__span-8-27"><span class="w">  </span>•<span class="w"> </span>Models<span class="w"> </span>trained:<span class="w"> </span>Yes
+</span></code></pre></div>
+<h2 id="important-notes">🚨 Important Notes</h2>
+<h3 id="this-is-real-machine-learning">This is REAL Machine Learning</h3>
+<ul>
+<li>✅ Uses actual scikit-learn algorithms</li>
+<li>✅ Numerical feature extraction and engineering</li>
+<li>✅ Model training with cross-validation</li>
+<li>✅ Statistical performance metrics</li>
+<li>✅ Hyperparameter optimization</li>
+</ul>
+<h3 id="this-is-not">This is NOT</h3>
+<ul>
+<li>❌ LLM-based text analysis</li>
+<li>❌ Simple pattern matching</li>
+<li>❌ Rule-based systems</li>
+<li>❌ Fake "AI" buzzword marketing</li>
+</ul>
+<h3 id="limitations">Limitations</h3>
+<ul>
+<li>Requires minimum 10 samples for initial training</li>
+<li>Small datasets may have lower accuracy</li>
+<li>Cross-validation may fail with very few samples per class</li>
+<li>Performance improves significantly with more data</li>
+</ul>
+<h2 id="troubleshooting">🛠️ Troubleshooting</h2>
+<h3 id="models-not-trained-error">"Models not trained" Error</h3>
+<p><strong>Solution</strong>: Add more training samples or trigger manual training:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1">/ml<span class="w"> </span>train
+</span></code></pre></div></p>
+<h3 id="low-confidence-predictions">Low Confidence Predictions</h3>
+<p><strong>Cause</strong>: Insufficient training data or unfamiliar patterns
+<strong>Solution</strong>: Use the system more to collect training data</p>
+<h3 id="cross-validation-errors">Cross-Validation Errors</h3>
+<p><strong>Cause</strong>: Too few samples per prediction category
+<strong>Solution</strong>: System automatically handles this by disabling stratification</p>
+<h2 id="contributing">🤝 Contributing</h2>
+<p>To extend the ML system:</p>
+<ol>
+<li><strong>Add new features</strong>: Modify <code>CybersecurityFeatureExtractor</code></li>
+<li><strong>Add new models</strong>: Extend the <code>models</code> dictionary in <code>RealMLEngine</code></li>
+<li><strong>Improve predictions</strong>: Add new target categories in <code>_create_target_label()</code></li>
+<li><strong>Optimize performance</strong>: Tune hyperparameters in <code>optimize_hyperparameters()</code></li>
+</ol>
+<h2 id="license">📄 License</h2>
+<p>This Real ML system is part of the CAI Framework and follows the same licensing terms.</p>
+<hr />
+<p><strong>Built with ❤️ and real machine learning by the CAI team</strong></p>
+<p>For questions or support, please refer to the main CAI documentation.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "navigation.path", "navigation.sections", "navigation.expand", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
