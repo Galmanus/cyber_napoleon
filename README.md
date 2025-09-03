@@ -4,7 +4,7 @@
 
 # 🔱 CYBER NAPOLEON - Advanced Cybersecurity AI Framework
 
-**Production-ready cybersecurity AI platform** built on [CAI Framework](https://github.com/aliasrobotics/cai) with ** machine learning**, **advanced evasion techniques**, and **enterprise deployment**.
+**Production-ready cybersecurity AI platform** built on [CAI Framework](https://github.com/aliasrobotics/cai) with **machine learning**, **advanced evasion techniques**, and **enterprise deployment**.
 
 ## ⚡ Key Features
 
